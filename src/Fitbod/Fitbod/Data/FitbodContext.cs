@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,8 @@ namespace Fitbod.Data
             : base(options)
         {
         }
+        public DbSet<Fitbod.Models.User> User { get; set; } = default!;
 
+        public DbSet<Fitbod.Models.Role> Role { get; set; }
     }
 }
