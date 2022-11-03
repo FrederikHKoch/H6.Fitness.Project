@@ -14,6 +14,5 @@ namespace Fitbod.Data
         {
         }
 
-        public DbSet<Fitbod.Models.Bruger> Bruger { get; set; } = default!;
     }
 }
