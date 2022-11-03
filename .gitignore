@@ -13,6 +13,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+src/Fitbod/Migrations/
+src/Fitbod/appsettings.Development.json
+src/Fitbod/appsettings.json
+
 # Mono auto generated files
 mono_crash.*
 
