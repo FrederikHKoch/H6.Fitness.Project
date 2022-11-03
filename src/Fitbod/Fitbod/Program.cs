@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Fitbod.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FitbodContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FitbodContext") ?? throw new InvalidOperationException("Connection string 'FitbodContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
