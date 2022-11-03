@@ -2,7 +2,7 @@
 
 namespace Fitbod.Models
 {
-    public class Bruger
+    public class User
     {
         [Key]
         [Required]

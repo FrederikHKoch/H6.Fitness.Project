@@ -10,85 +10,85 @@ using Fitbod.Models;
 
 namespace Fitbod.Controllers
 {
-    public class BrugersController : Controller
+    public class UsersController : Controller
     {
         private readonly FitbodContext _context;
 
-        public BrugersController(FitbodContext context)
+        public UsersController(FitbodContext context)
         {
             _context = context;
         }
 
-        // GET: Brugers
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Bruger.ToListAsync());
+              return View(await _context.User.ToListAsync());
         }
 
-        // GET: Brugers/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Bruger == null)
+            if (id == null || _context.User == null)
             {
                 return NotFound();
             }
 
-            var bruger = await _context.Bruger
+            var user = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (bruger == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(bruger);
+            return View(user);
         }
 
-        // GET: Brugers/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Brugers/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fornavn,Efternavn,Email,Køn,Password")] Bruger bruger)
+        public async Task<IActionResult> Create([Bind("Id,Fornavn,Efternavn,Email,Køn,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bruger);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(bruger);
+            return View(user);
         }
 
-        // GET: Brugers/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Bruger == null)
+            if (id == null || _context.User == null)
             {
                 return NotFound();
             }
 
-            var bruger = await _context.Bruger.FindAsync(id);
-            if (bruger == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(bruger);
+            return View(user);
         }
 
-        // POST: Brugers/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fornavn,Efternavn,Email,Køn,Password")] Bruger bruger)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fornavn,Efternavn,Email,Køn,Password")] User user)
         {
-            if (id != bruger.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Fitbod.Controllers
             {
                 try
                 {
-                    _context.Update(bruger);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrugerExists(bruger.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Fitbod.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(bruger);
+            return View(user);
         }
 
-        // GET: Brugers/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Bruger == null)
+            if (id == null || _context.User == null)
             {
                 return NotFound();
             }
 
-            var bruger = await _context.Bruger
+            var user = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (bruger == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(bruger);
+            return View(user);
         }
 
-        // POST: Brugers/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Bruger == null)
+            if (_context.User == null)
             {
-                return Problem("Entity set 'FitbodContext.Bruger'  is null.");
+                return Problem("Entity set 'FitbodContext.User'  is null.");
             }
-            var bruger = await _context.Bruger.FindAsync(id);
-            if (bruger != null)
+            var user = await _context.User.FindAsync(id);
+            if (user != null)
             {
-                _context.Bruger.Remove(bruger);
+                _context.User.Remove(user);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BrugerExists(int id)
+        private bool UserExists(int id)
         {
-          return _context.Bruger.Any(e => e.Id == id);
+          return _context.User.Any(e => e.Id == id);
         }
     }
 }

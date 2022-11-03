@@ -13,7 +13,6 @@ namespace Fitbod.Data
             : base(options)
         {
         }
-
-        public DbSet<Fitbod.Models.Bruger> Bruger { get; set; } = default!;
+        public DbSet<Fitbod.Models.User> User { get; set; }
     }
 }
