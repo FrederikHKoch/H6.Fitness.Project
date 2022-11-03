@@ -16,3 +16,38 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 5%;
+}
+
+.footer {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 10px;
+}
+
+.column {
+    float: left;
+}
+
+    /* Left and right column */
+    .column.side {
+        width: 25%;
+    }
+
+    /* Middle column */
+    .column.middle {
+        width: 50%;
+    }
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
