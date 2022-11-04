@@ -22,7 +22,7 @@ namespace Fitbod.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            var fitbodContext = _context.User.Include(u => u.RoleModel);
+            var fitbodContext = _context.User.Include(u => u.Role);
             return View(await fitbodContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace Fitbod.Controllers
             }
 
             var user = await _context.User
-                .Include(u => u.RoleModel)
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
@@ -48,7 +48,7 @@ namespace Fitbod.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.Set<RoleModel>(), "RoleId", "UserType");
+            ViewData["RoleId"] = new SelectList(_context.Set<Role>(), "RoleId", "UserType");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName,Email,Gender,Password,RoleId")] UserModel user)
+        public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName,Email,Gender,Password,RoleId")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Fitbod.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Set<RoleModel>(), "RoleId", "UserType", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Set<Role>(), "RoleId", "UserType", user.RoleId);
             return View(user);
         }
 
@@ -82,7 +82,7 @@ namespace Fitbod.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.Set<RoleModel>(), "RoleId", "UserType", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Set<Role>(), "RoleId", "UserType", user.RoleId);
             return View(user);
         }
 
@@ -91,7 +91,7 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,FirstName,LastName,Email,Gender,Password,RoleId")] UserModel user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,FirstName,LastName,Email,Gender,Password,RoleId")] User user)
         {
             if (id != user.UserId)
             {
@@ -118,7 +118,7 @@ namespace Fitbod.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Set<RoleModel>(), "RoleId", "UserType", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Set<Role>(), "RoleId", "UserType", user.RoleId);
             return View(user);
         }
 
@@ -131,7 +131,7 @@ namespace Fitbod.Controllers
             }
 
             var user = await _context.User
-                .Include(u => u.RoleModel)
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {

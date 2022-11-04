@@ -22,25 +22,25 @@ namespace Fitbod.Controllers
         // GET: WeeklyFoodPlan
         public async Task<IActionResult> Index()
         {
-              return View(await _context.WeeklyFoodPlanModel.ToListAsync());
+              return View(await _context.WeeklyFoodPlan.ToListAsync());
         }
 
         // GET: WeeklyFoodPlan/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.WeeklyFoodPlanModel == null)
+            if (id == null || _context.WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
 
-            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel
+            var WeeklyFoodPlan = await _context.WeeklyFoodPlan
                 .FirstOrDefaultAsync(m => m.WfpId == id);
-            if (weeklyFoodPlanModel == null)
+            if (WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
 
-            return View(weeklyFoodPlanModel);
+            return View(WeeklyFoodPlan);
         }
 
         // GET: WeeklyFoodPlan/Create
@@ -54,31 +54,31 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WfpId,Week,Year")] WeeklyFoodPlanModel weeklyFoodPlanModel)
+        public async Task<IActionResult> Create([Bind("WfpId,Week,Year")] WeeklyFoodPlan WeeklyFoodPlan)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(weeklyFoodPlanModel);
+                _context.Add(WeeklyFoodPlan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(weeklyFoodPlanModel);
+            return View(WeeklyFoodPlan);
         }
 
         // GET: WeeklyFoodPlan/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.WeeklyFoodPlanModel == null)
+            if (id == null || _context.WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
 
-            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel.FindAsync(id);
-            if (weeklyFoodPlanModel == null)
+            var WeeklyFoodPlan = await _context.WeeklyFoodPlan.FindAsync(id);
+            if (WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
-            return View(weeklyFoodPlanModel);
+            return View(WeeklyFoodPlan);
         }
 
         // POST: WeeklyFoodPlan/Edit/5
@@ -86,9 +86,9 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WfpId,Week,Year")] WeeklyFoodPlanModel weeklyFoodPlanModel)
+        public async Task<IActionResult> Edit(int id, [Bind("WfpId,Week,Year")] WeeklyFoodPlan WeeklyFoodPlan)
         {
-            if (id != weeklyFoodPlanModel.WfpId)
+            if (id != WeeklyFoodPlan.WfpId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Fitbod.Controllers
             {
                 try
                 {
-                    _context.Update(weeklyFoodPlanModel);
+                    _context.Update(WeeklyFoodPlan);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WeeklyFoodPlanModelExists(weeklyFoodPlanModel.WfpId))
+                    if (!WeeklyFoodPlanModelExists(WeeklyFoodPlan.WfpId))
                     {
                         return NotFound();
                     }
@@ -113,25 +113,25 @@ namespace Fitbod.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(weeklyFoodPlanModel);
+            return View(WeeklyFoodPlan);
         }
 
         // GET: WeeklyFoodPlan/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.WeeklyFoodPlanModel == null)
+            if (id == null || _context.WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
 
-            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel
+            var WeeklyFoodPlan = await _context.WeeklyFoodPlan
                 .FirstOrDefaultAsync(m => m.WfpId == id);
-            if (weeklyFoodPlanModel == null)
+            if (WeeklyFoodPlan == null)
             {
                 return NotFound();
             }
 
-            return View(weeklyFoodPlanModel);
+            return View(WeeklyFoodPlan);
         }
 
         // POST: WeeklyFoodPlan/Delete/5
@@ -139,14 +139,14 @@ namespace Fitbod.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.WeeklyFoodPlanModel == null)
+            if (_context.WeeklyFoodPlan == null)
             {
-                return Problem("Entity set 'FitbodContext.WeeklyFoodPlanModel'  is null.");
+                return Problem("Entity set 'FitbodContext.WeeklyFoodPlan'  is null.");
             }
-            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel.FindAsync(id);
-            if (weeklyFoodPlanModel != null)
+            var WeeklyFoodPlan = await _context.WeeklyFoodPlan.FindAsync(id);
+            if (WeeklyFoodPlan != null)
             {
-                _context.WeeklyFoodPlanModel.Remove(weeklyFoodPlanModel);
+                _context.WeeklyFoodPlan.Remove(WeeklyFoodPlan);
             }
             
             await _context.SaveChangesAsync();
@@ -155,7 +155,7 @@ namespace Fitbod.Controllers
 
         private bool WeeklyFoodPlanModelExists(int id)
         {
-          return _context.WeeklyFoodPlanModel.Any(e => e.WfpId == id);
+          return _context.WeeklyFoodPlan.Any(e => e.WfpId == id);
         }
     }
 }

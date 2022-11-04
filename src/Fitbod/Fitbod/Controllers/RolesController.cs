@@ -54,7 +54,7 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleId,UserType")] RoleModel role)
+        public async Task<IActionResult> Create([Bind("RoleId,UserType")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleId,UserType")] RoleModel role)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleId,UserType")] Role role)
         {
             if (id != role.RoleId)
             {

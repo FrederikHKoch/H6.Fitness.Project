@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitbod.Models;
 
-public class UserModel
+public class User
 {
     [Key] public int UserId { get; set; }
     [Required] public string FirstName { get; set; }
@@ -12,5 +12,5 @@ public class UserModel
     public string Gender { get; set; }
     [Required] public string Password { get; set; }
     public int RoleId { get; set; }
-    [ForeignKey("RoleId")] public RoleModel RoleModel { get; set; }
+    [ForeignKey("RoleId")] public Role Role { get; set; }
 }

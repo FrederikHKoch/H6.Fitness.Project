@@ -1,4 +1,4 @@
-@model IEnumerable<Fitbod.Models.WeekDayModel>
+@model IEnumerable<Fitbod.Models.WeekDay>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Day)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DishModel)
+                @Html.DisplayNameFor(model => model.Dish)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WeeklyFoodPlanModel)
+                @Html.DisplayNameFor(model => model.WeeklyFoodPlan)
             </th>
             <th></th>
         </tr>
@@ -31,10 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Day)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DishModel.Name)
+                @Html.DisplayFor(modelItem => item.Dish.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WeeklyFoodPlanModel.WfpId)
+                @Html.DisplayFor(modelItem => item.WeeklyFoodPlan.WfpId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.WeekDayId">Edit</a> |

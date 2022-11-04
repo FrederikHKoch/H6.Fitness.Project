@@ -22,35 +22,35 @@ namespace Fitbod.Controllers
         // GET: WeekDay
         public async Task<IActionResult> Index()
         {
-            var fitbodContext = _context.WeekDayModel.Include(w => w.DishModel).Include(w => w.WeeklyFoodPlanModel);
+            var fitbodContext = _context.WeekDay.Include(w => w.Dish).Include(w => w.WeeklyFoodPlan);
             return View(await fitbodContext.ToListAsync());
         }
 
         // GET: WeekDay/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.WeekDayModel == null)
+            if (id == null || _context.WeekDay == null)
             {
                 return NotFound();
             }
 
-            var weekDayModel = await _context.WeekDayModel
-                .Include(w => w.DishModel)
-                .Include(w => w.WeeklyFoodPlanModel)
+            var WeekDay = await _context.WeekDay
+                .Include(w => w.Dish)
+                .Include(w => w.WeeklyFoodPlan)
                 .FirstOrDefaultAsync(m => m.WeekDayId == id);
-            if (weekDayModel == null)
+            if (WeekDay == null)
             {
                 return NotFound();
             }
 
-            return View(weekDayModel);
+            return View(WeekDay);
         }
 
         // GET: WeekDay/Create
         public IActionResult Create()
         {
-            ViewData["DishId"] = new SelectList(_context.DishModel, "DishId", "Name");
-            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlanModel>(), "WfpId", "WfpId");
+            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name");
+            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlan>(), "WfpId", "WfpId");
             return View();
         }
 
@@ -59,35 +59,35 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WeekDayId,Day,DishId,WfpId")] WeekDayModel weekDayModel)
+        public async Task<IActionResult> Create([Bind("WeekDayId,Day,DishId,WfpId")] WeekDay WeekDay)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(weekDayModel);
+                _context.Add(WeekDay);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DishId"] = new SelectList(_context.DishModel, "DishId", "Name", weekDayModel.DishId);
-            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlanModel>(), "WfpId", "WfpId", weekDayModel.WfpId);
-            return View(weekDayModel);
+            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
+            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlan>(), "WfpId", "WfpId", WeekDay.WfpId);
+            return View(WeekDay);
         }
 
         // GET: WeekDay/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.WeekDayModel == null)
+            if (id == null || _context.WeekDay == null)
             {
                 return NotFound();
             }
 
-            var weekDayModel = await _context.WeekDayModel.FindAsync(id);
-            if (weekDayModel == null)
+            var WeekDay = await _context.WeekDay.FindAsync(id);
+            if (WeekDay == null)
             {
                 return NotFound();
             }
-            ViewData["DishId"] = new SelectList(_context.DishModel, "DishId", "Name", weekDayModel.DishId);
-            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlanModel>(), "WfpId", "WfpId", weekDayModel.WfpId);
-            return View(weekDayModel);
+            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
+            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlan>(), "WfpId", "WfpId", WeekDay.WfpId);
+            return View(WeekDay);
         }
 
         // POST: WeekDay/Edit/5
@@ -95,9 +95,9 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WeekDayId,Day,DishId,WfpId")] WeekDayModel weekDayModel)
+        public async Task<IActionResult> Edit(int id, [Bind("WeekDayId,Day,DishId,WfpId")] WeekDay WeekDay)
         {
-            if (id != weekDayModel.WeekDayId)
+            if (id != WeekDay.WeekDayId)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace Fitbod.Controllers
             {
                 try
                 {
-                    _context.Update(weekDayModel);
+                    _context.Update(WeekDay);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WeekDayModelExists(weekDayModel.WeekDayId))
+                    if (!WeekDayModelExists(WeekDay.WeekDayId))
                     {
                         return NotFound();
                     }
@@ -122,29 +122,29 @@ namespace Fitbod.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DishId"] = new SelectList(_context.DishModel, "DishId", "Name", weekDayModel.DishId);
-            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlanModel>(), "WfpId", "WfpId", weekDayModel.WfpId);
-            return View(weekDayModel);
+            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
+            ViewData["WfpId"] = new SelectList(_context.Set<WeeklyFoodPlan>(), "WfpId", "WfpId", WeekDay.WfpId);
+            return View(WeekDay);
         }
 
         // GET: WeekDay/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.WeekDayModel == null)
+            if (id == null || _context.WeekDay == null)
             {
                 return NotFound();
             }
 
-            var weekDayModel = await _context.WeekDayModel
-                .Include(w => w.DishModel)
-                .Include(w => w.WeeklyFoodPlanModel)
+            var WeekDay = await _context.WeekDay
+                .Include(w => w.Dish)
+                .Include(w => w.WeeklyFoodPlan)
                 .FirstOrDefaultAsync(m => m.WeekDayId == id);
-            if (weekDayModel == null)
+            if (WeekDay == null)
             {
                 return NotFound();
             }
 
-            return View(weekDayModel);
+            return View(WeekDay);
         }
 
         // POST: WeekDay/Delete/5
@@ -152,14 +152,14 @@ namespace Fitbod.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.WeekDayModel == null)
+            if (_context.WeekDay == null)
             {
-                return Problem("Entity set 'FitbodContext.WeekDayModel'  is null.");
+                return Problem("Entity set 'FitbodContext.WeekDay'  is null.");
             }
-            var weekDayModel = await _context.WeekDayModel.FindAsync(id);
-            if (weekDayModel != null)
+            var WeekDay = await _context.WeekDay.FindAsync(id);
+            if (WeekDay != null)
             {
-                _context.WeekDayModel.Remove(weekDayModel);
+                _context.WeekDay.Remove(WeekDay);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace Fitbod.Controllers
 
         private bool WeekDayModelExists(int id)
         {
-          return _context.WeekDayModel.Any(e => e.WeekDayId == id);
+          return _context.WeekDay.Any(e => e.WeekDayId == id);
         }
     }
 }
