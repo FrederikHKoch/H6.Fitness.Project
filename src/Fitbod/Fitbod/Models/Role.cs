@@ -5,12 +5,8 @@ namespace Fitbod.Models;
 
 public class Role
 {
-    [Key] 
-    public int RoleId { get; set; }
-    
-    [Required] 
-    public string UserType { get; set; }
-
+    [Key] public int RoleId { get; set; }
+    [Required] public string UserType { get; set; }
     //Foreign Key reference
     public User User { get; set; }
 }
