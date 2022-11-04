@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,13 @@ namespace Fitbod.Data
             : base(options)
         {
         }
+
+        public DbSet<Exercise> Exercise { get; set; }
+
+        public DbSet<ExercisePlan> ExercisePlan { get; set; }
+
+        public DbSet<ExercisePlanEntry> ExercisePlanEntry { get; set; }
+
         public DbSet<User> User { get; set; } = default!;
 
         public DbSet<Role> Role { get; set; }
@@ -22,5 +29,6 @@ namespace Fitbod.Data
         public DbSet<WeekDay> WeekDay { get; set; }
 
         public DbSet<WeeklyFoodPlan> WeeklyFoodPlan { get; set; }
+
     }
 }
