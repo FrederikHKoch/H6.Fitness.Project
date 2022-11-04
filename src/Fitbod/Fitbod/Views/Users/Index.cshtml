@@ -1,4 +1,4 @@
-@model IEnumerable<Fitbod.Models.User>
+@model IEnumerable<Fitbod.Models.UserModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.Password)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Html.DisplayNameFor(model => model.RoleModel)
             </th>
             <th></th>
         </tr>
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Role.UserType)
+                @Html.DisplayFor(modelItem => item.RoleModel.UserType)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |

@@ -10,85 +10,85 @@ using Fitbod.Models;
 
 namespace Fitbod.Controllers
 {
-    public class RolesController : Controller
+    public class WeeklyFoodPlanController : Controller
     {
         private readonly FitbodContext _context;
 
-        public RolesController(FitbodContext context)
+        public WeeklyFoodPlanController(FitbodContext context)
         {
             _context = context;
         }
 
-        // GET: Roles
+        // GET: WeeklyFoodPlan
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Role.ToListAsync());
+              return View(await _context.WeeklyFoodPlanModel.ToListAsync());
         }
 
-        // GET: Roles/Details/5
+        // GET: WeeklyFoodPlan/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null || _context.WeeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
+            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel
+                .FirstOrDefaultAsync(m => m.WfpId == id);
+            if (weeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
 
-            return View(role);
+            return View(weeklyFoodPlanModel);
         }
 
-        // GET: Roles/Create
+        // GET: WeeklyFoodPlan/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: WeeklyFoodPlan/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleId,UserType")] RoleModel role)
+        public async Task<IActionResult> Create([Bind("WfpId,Week,Year")] WeeklyFoodPlanModel weeklyFoodPlanModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(role);
+                _context.Add(weeklyFoodPlanModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(role);
+            return View(weeklyFoodPlanModel);
         }
 
-        // GET: Roles/Edit/5
+        // GET: WeeklyFoodPlan/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null || _context.WeeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Role.FindAsync(id);
-            if (role == null)
+            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel.FindAsync(id);
+            if (weeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
-            return View(role);
+            return View(weeklyFoodPlanModel);
         }
 
-        // POST: Roles/Edit/5
+        // POST: WeeklyFoodPlan/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleId,UserType")] RoleModel role)
+        public async Task<IActionResult> Edit(int id, [Bind("WfpId,Week,Year")] WeeklyFoodPlanModel weeklyFoodPlanModel)
         {
-            if (id != role.RoleId)
+            if (id != weeklyFoodPlanModel.WfpId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Fitbod.Controllers
             {
                 try
                 {
-                    _context.Update(role);
+                    _context.Update(weeklyFoodPlanModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoleExists(role.RoleId))
+                    if (!WeeklyFoodPlanModelExists(weeklyFoodPlanModel.WfpId))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Fitbod.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(role);
+            return View(weeklyFoodPlanModel);
         }
 
-        // GET: Roles/Delete/5
+        // GET: WeeklyFoodPlan/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null || _context.WeeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
+            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel
+                .FirstOrDefaultAsync(m => m.WfpId == id);
+            if (weeklyFoodPlanModel == null)
             {
                 return NotFound();
             }
 
-            return View(role);
+            return View(weeklyFoodPlanModel);
         }
 
-        // POST: Roles/Delete/5
+        // POST: WeeklyFoodPlan/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Role == null)
+            if (_context.WeeklyFoodPlanModel == null)
             {
-                return Problem("Entity set 'FitbodContext.Role'  is null.");
+                return Problem("Entity set 'FitbodContext.WeeklyFoodPlanModel'  is null.");
             }
-            var role = await _context.Role.FindAsync(id);
-            if (role != null)
+            var weeklyFoodPlanModel = await _context.WeeklyFoodPlanModel.FindAsync(id);
+            if (weeklyFoodPlanModel != null)
             {
-                _context.Role.Remove(role);
+                _context.WeeklyFoodPlanModel.Remove(weeklyFoodPlanModel);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoleExists(int id)
+        private bool WeeklyFoodPlanModelExists(int id)
         {
-          return _context.Role.Any(e => e.RoleId == id);
+          return _context.WeeklyFoodPlanModel.Any(e => e.WfpId == id);
         }
     }
 }

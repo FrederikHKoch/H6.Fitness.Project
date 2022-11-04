@@ -1,0 +1,47 @@
+@model IEnumerable<Fitbod.Models.WeekDayModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeeklyFoodPlanModel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishModel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeeklyFoodPlanModel.WfpId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.WeekDayId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.WeekDayId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WeekDayId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

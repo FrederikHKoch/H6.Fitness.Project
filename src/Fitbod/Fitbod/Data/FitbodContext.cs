@@ -13,8 +13,14 @@ namespace Fitbod.Data
             : base(options)
         {
         }
-        public DbSet<Fitbod.Models.User> User { get; set; } = default!;
+        public DbSet<UserModel> User { get; set; } = default!;
 
-        public DbSet<Fitbod.Models.Role> Role { get; set; }
+        public DbSet<RoleModel> Role { get; set; }
+
+        public DbSet<Fitbod.Models.DishModel> DishModel { get; set; }
+
+        public DbSet<Fitbod.Models.WeekDayModel> WeekDayModel { get; set; }
+
+        public DbSet<Fitbod.Models.WeeklyFoodPlanModel> WeeklyFoodPlanModel { get; set; }
     }
 }
