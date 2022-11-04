@@ -3,13 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitbod.Models
 {
-    public class ExercisePlanModel
+    public class ExercisePlan
     {
         [Key]
-        public int Id { get; set; }
+        public int ExercisePlanId { get; set; }
         [Required]
         public string Name { get; set; }
+
         [Required]
-        public ExerciseModel Exercise { get; set; }
+        public User User { get; set; }
+
     }
 }
