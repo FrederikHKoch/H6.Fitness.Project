@@ -30,5 +30,9 @@ namespace Fitbod.Data
 
         public DbSet<WeeklyFoodPlan> WeeklyFoodPlan { get; set; }
 
+        public DbSet<Fitbod.Models.TeamSignUp> TeamSignUp { get; set; }
+
+        public DbSet<Fitbod.Models.TrainingClass> TrainingClass { get; set; }
+
     }
 }
