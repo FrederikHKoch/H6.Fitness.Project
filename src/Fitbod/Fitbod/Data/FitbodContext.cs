@@ -13,7 +13,7 @@ namespace Fitbod.Data
             : base(options)
         {
         }
-
+        
         public DbSet<Exercise> Exercise { get; set; }
 
         public DbSet<ExercisePlan> ExercisePlan { get; set; }
