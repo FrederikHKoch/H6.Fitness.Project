@@ -17,11 +17,21 @@ body {
   margin-bottom: 60px;
 }
 
-
 .header {
     background-color: #F1F1F1;
     text-align: center;
-    padding: 20px;
+    padding: 1%;
+    margin-bottom: 5%;
+}
+
+.homepagecustomheader {
+    background-color: #7C809B;
+    color: white;
+}
+
+.homepagepictures {
+    width: 100%;
+    box-shadow: 5px 5px 10px lightblue;
     margin-bottom: 5%;
 }
 

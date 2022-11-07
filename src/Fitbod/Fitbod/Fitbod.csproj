@@ -23,4 +23,8 @@
       <Folder Include="Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\img\RunningManHomepage.jpg" />
+    </ItemGroup>
+
 </Project>
