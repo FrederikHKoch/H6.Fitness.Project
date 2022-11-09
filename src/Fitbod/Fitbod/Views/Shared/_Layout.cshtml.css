@@ -23,7 +23,7 @@ a {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: white;
   border-color: #1861ac;
 }
 
@@ -48,7 +48,7 @@ button.accept-policy {
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px;
+    line-height: 30px;
     background-color: #1A1423;
     color: white !important;
 }
