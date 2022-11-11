@@ -24,5 +24,14 @@
     <ItemGroup>
       <None Include="wwwroot\img\RunningManHomepage.jpg" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Login" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Account\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
+    </ItemGroup>
     
 </Project>

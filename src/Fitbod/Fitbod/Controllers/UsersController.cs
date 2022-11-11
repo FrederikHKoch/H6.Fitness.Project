@@ -26,6 +26,12 @@ namespace Fitbod.Controllers
             return View(await fitbodContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Login()
+        {
+            var fitbodContext = _context.User.Include(u => u.Role);
+            return View();
+        }
+        
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
