@@ -5,20 +5,22 @@
 }
 
 <h1>Login</h1>
-<div>
-    <table>
-        <tr>
-            <td>
-                <asp:TextBox ID="username"></asp:TextBox>
-            </td>
-            <td>
-                <asp:TextBox ID="password"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Button ID="submit"></asp:Button>
-            </td>
-        </tr>
-    </table>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login" asp-controller="Users">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>

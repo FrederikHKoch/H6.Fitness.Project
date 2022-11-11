@@ -26,12 +26,6 @@ namespace Fitbod.Controllers
             return View(await fitbodContext.ToListAsync());
         }
 
-        public async Task<IActionResult> Login()
-        {
-            var fitbodContext = _context.User.Include(u => u.Role);
-            return View();
-        }
-        
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -169,6 +163,24 @@ namespace Fitbod.Controllers
         private bool UserExists(int id)
         {
           return _context.User.Any(e => e.UserId == id);
+        }
+        
+        public IActionResult Login()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Login(User model)
+        {
+            var user = _context.User.FirstOrDefault(x => x.Email == model.Email);
+                if (user != null && user.Email == model.Email && user.Password == model.Password)
+                {
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            return View("Login");
         }
     }
 }

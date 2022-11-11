@@ -24,9 +24,5 @@ public class AccountController : Controller
     {
         return null;
     }
-    // GET
-    public IActionResult Index()
-    {
-        return View();
-    }
+    // GETdotnet
 }
