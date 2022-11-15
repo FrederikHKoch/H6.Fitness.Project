@@ -10,8 +10,8 @@ namespace Fitbod.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public User User { get; set; }
+        // [Required]
+        // public User User { get; set; }
 
     }
 }
