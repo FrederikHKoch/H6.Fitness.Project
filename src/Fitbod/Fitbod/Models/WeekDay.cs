@@ -12,5 +12,6 @@ public class WeekDay
     [ForeignKey("DishId")] public Dish Dish { get; set; }
     
     public int WfpId { get; set; }
-    [ForeignKey("WfpId")]public WeeklyFoodPlan WeeklyFoodPlan { get; set; }
+    [ForeignKey("WfpId")]
+    public WeeklyFoodPlan WeeklyFoodPlan { get; set; }
 }
