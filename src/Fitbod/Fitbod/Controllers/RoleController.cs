@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fitbod.Controllers;
 
+[Authorize(Policy = "rolecreation")]
 public class RoleController : Controller
 {
     RoleManager<IdentityRole> roleManager;
@@ -18,14 +19,12 @@ public class RoleController : Controller
         return View(roles);
     }
     
-    [Authorize(Policy = "rolecreation")]
     public IActionResult Create()
     {
         return View(new IdentityRole());
     }
     
     [HttpPost]
-    [Authorize(Policy = "rolecreation")]
     public async Task<IActionResult> Create(IdentityRole role)
     {
         await roleManager.CreateAsync(role);

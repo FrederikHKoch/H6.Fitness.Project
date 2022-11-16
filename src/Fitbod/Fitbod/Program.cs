@@ -23,10 +23,6 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admin", policy =>
-        policy.RequireClaim("FirstName", "Per")
-        );
-    
     options.AddPolicy("rolecreation", policy =>
         policy.RequireRole("Admin")
     );

@@ -18,7 +18,7 @@ public class HomeController : Controller
     {
         return View();
     }
-    [Authorize(Policy = "Admin")]
+    [Authorize]
     public IActionResult Privacy()
     {
         return View();
