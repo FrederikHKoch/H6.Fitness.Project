@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fitbod.Controllers;
 
-[Authorize(Policy = "rolecreation")]
+//[Authorize(Policy = "rolecreation")]
 public class RoleController : Controller
 {
     RoleManager<IdentityRole> roleManager;

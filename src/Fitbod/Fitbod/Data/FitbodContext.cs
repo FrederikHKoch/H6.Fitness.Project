@@ -31,6 +31,7 @@ namespace Fitbod.Data
         public DbSet<Fitbod.Models.TeamSignUp> TeamSignUp { get; set; }
 
         public DbSet<Fitbod.Models.TrainingClass> TrainingClass { get; set; }
+        public DbSet<Areas.Identity.Data.FitbodUser> FitbodUser { get; set; }
 
     }
 }
