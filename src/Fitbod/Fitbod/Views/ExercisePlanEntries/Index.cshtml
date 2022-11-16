@@ -4,14 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Øvelsesoversigt</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayName("Navn")
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Repetitions)
             </th>
@@ -19,29 +19,35 @@
                 @Html.DisplayNameFor(model => model.Sets)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Day)
+                @Html.DisplayName("Dag")
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Repetitions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EntryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EntryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EntryId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exercise.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Repetitions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sets)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    <a asp-action="EntryEdit" asp-route-id="@item.EntryId">Ændre</a> |
+                    <a asp-action="EntryDelete" asp-route-id="@item.EntryId">Fjern</a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Tilbage til Planoversigt</a>
+</div>

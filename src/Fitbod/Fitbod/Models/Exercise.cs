@@ -15,9 +15,7 @@ namespace Fitbod.Models
         public string Description { get; set; }
         [Required]
         public string Image { get; set; }
-
-        [Required]
-        public ExercisePlanEntry Entry { get; set; }
+        public ICollection<ExercisePlanEntry> ExercisePlanEntry { get; set; }
 
     }
 }

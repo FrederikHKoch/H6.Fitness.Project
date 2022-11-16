@@ -1,16 +1,15 @@
-﻿@model Fitbod.Models.ExercisePlanEntry
+﻿@using Fitbod.Data
+@model Fitbod.Models.ExercisePlanEntry
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>ExercisePlanEntry</h4>
+<h4>Øvelseinfo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EntryEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EntryId" />
             <div class="form-group">
@@ -24,19 +23,22 @@
                 <span asp-validation-for="Sets" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Day" class="control-label"></label>
-                <input asp-for="Day" class="form-control" />
+                <label asp-for="Day" class="control-label">Dag</label>
+                <select asp-for="Day" class="form-control" asp-items="Html.GetEnumSelectList<WeekDayEnum>()"></select>
                 <span asp-validation-for="Day" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="ExerciseId" />
+            <input type="hidden" asp-for="ExercisePlanId" />
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="ExercisePlanEntryDetails" asp-route-id="@Model?.ExercisePlanId">Tilbage til Oversigt</a>
 </div>
 
 @section Scripts {
