@@ -45,7 +45,7 @@ namespace Fitbod.Controllers
 
         // GET: ExercisePlanEntries/Create
         public IActionResult Create()
-        {
+        {            
             return View();
         }
 
@@ -117,7 +117,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: ExercisePlanEntries/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> EntryDelete(int? id)
         {
             if (id == null || _context.ExercisePlanEntry == null)
             {

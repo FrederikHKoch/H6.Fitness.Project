@@ -1,4 +1,4 @@
-﻿@model Fitbod.Models.Exercise
+﻿@model Fitbod.ViewModel.ExercisesViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,28 +10,36 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateExercise" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Exercises.Name" class="control-label"></label>
+                <input asp-for="Exercises.Name" class="form-control" />
+                <span asp-validation-for="Exercises.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Musclegroup" class="control-label"></label>
-                <input asp-for="Musclegroup" class="form-control" />
-                <span asp-validation-for="Musclegroup" class="text-danger"></span>
+                <label asp-for="Exercises.Musclegroup" class="control-label"></label>
+                <input asp-for="Exercises.Musclegroup" class="form-control" />
+                <span asp-validation-for="Exercises.Musclegroup" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Exercises.Description" class="control-label"></label>
+                <input asp-for="Exercises.Description" class="form-control" />
+                <span asp-validation-for="Exercises.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+            <label class="col-md-2 control-label">Image</label>
+            <div class="col-md-10">
+                <div id="chooseFile">
+                    <input class="form-control" type="file" name="image" accept=".png, .jpeg, .jpg" />
+                </div>
             </div>
+
+
+            @*<div class="form-group">
+                <label asp-for="Exercises.Image" class="control-label"></label>
+                <input asp-for="Exercises.Image" class="form-control" />
+                <span asp-validation-for="Exercises.Image" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

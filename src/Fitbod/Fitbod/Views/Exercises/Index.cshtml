@@ -4,50 +4,65 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Musclegroup)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Musclegroup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="column side">
+        <h6>Muskelgruppe</h6>
+        <ol class="ol_exercise_custom">
+            <li><a class="a_exercise_custom" href="/Exercises/IndexBiceps">Bicep</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexHamstring">Baglår</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexCalves">Læg</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexChest">Bryst</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexBack">Ryg</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexShoulders">Skulder</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexTriceps">Tricep</a></li>
+            <li><a class="a_exercise_custom" href="/Exercises/IndexAbs">Mavemuskler</a></li>
+        </ol>
+    </div>
+    <div class="column middle">
+        <h1>Index</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Musclegroup)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Musclegroup)
+                        </td>
+                        <td>
+                            <img src="~/img/exercises/@item.Image" class="rounded-square" height="50" width="75" style="border:1px" asp-append-version="true" accept="image/*" />
+                            @*@Html.DisplayFor(modelItem => item.Image)*@
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
