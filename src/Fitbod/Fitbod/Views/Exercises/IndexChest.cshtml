@@ -20,6 +20,7 @@
     </div>
     <div class="column middle">
         <h1>Index</h1>
+        <p>custom message om musklegruppen</p>
         <table class="table">
             <thead>
                 <tr>
@@ -28,9 +29,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Musclegroup)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
@@ -49,16 +47,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Musclegroup)
-                        </td>
-                        <td>
-                            <img src="~/img/exercises/@item.Image" class="rounded-square" height="50" width="75" style="border:1px" asp-append-version="true" accept="image/*" />
-                            @*@Html.DisplayFor(modelItem => item.Image)*@
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
+                            @Html.DisplayFor(modelItem => item.Image)
                         </td>
                     </tr>
                 }

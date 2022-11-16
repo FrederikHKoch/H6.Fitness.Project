@@ -9,9 +9,11 @@ namespace Fitbod.Models
         public int ExercisePlanId { get; set; }
         [Required]
         public string Name { get; set; }
+        public int UserId { get; set; }
 
-        [Required]
+        [ForeignKey("UserId")]
         public User User { get; set; }
 
+        public ICollection<ExercisePlanEntry> ExercisePlanEntries { get; set; }
     }
 }
