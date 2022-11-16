@@ -26,23 +26,7 @@
     <ItemGroup>
       <None Include="wwwroot\img\RunningManHomepage.jpg" />
     </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Account\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Users\Login.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Roles\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Roles\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Roles\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Roles\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Roles\Index.cshtml" />
-    </ItemGroup>
-
+    
     <ItemGroup>
       <Folder Include="Pages" />
     </ItemGroup>
