@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Fitbod.Areas.Identity.Data;
 
 namespace Fitbod.Models
 {
@@ -11,9 +12,10 @@ namespace Fitbod.Models
         public string Name { get; set; }
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        [ForeignKey("Id")]
+        public FitbodUser FitbodUser { get; set; }
 
         public ICollection<ExercisePlanEntry> ExercisePlanEntries { get; set; }
+
     }
 }

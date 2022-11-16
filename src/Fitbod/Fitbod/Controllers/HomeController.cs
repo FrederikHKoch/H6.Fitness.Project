@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Fitbod.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitbod.Controllers;
 
@@ -17,7 +18,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    [Authorize]
     public IActionResult Privacy()
     {
         return View();
