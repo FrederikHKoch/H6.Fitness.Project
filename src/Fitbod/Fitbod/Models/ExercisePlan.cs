@@ -10,6 +10,7 @@ namespace Fitbod.Models
         public int ExercisePlanId { get; set; }
         [Required]
         public string Name { get; set; }
+        public int UserId { get; set; }
 
         [ForeignKey("Id")]
         public FitbodUser FitbodUser { get; set; }

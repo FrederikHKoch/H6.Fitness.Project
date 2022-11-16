@@ -29,6 +29,7 @@
     
     <ItemGroup>
       <Folder Include="Pages" />
+      <Folder Include="wwwroot\img\exercises\" />
     </ItemGroup>
     
 </Project>
