@@ -1,19 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Fitbod.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitbod.Models
 {
     public class TeamSignUp
     {
         [Key]
-        public int Id { get; set; }
+        public int TeamSignUpId { get; set; }
 
-        // [Required]
-        // public User User { get; set; }
+        [ForeignKey("Id")]
+        public FitbodUser FitbodUser { get; set; }
 
-        [Required]
+        [ForeignKey("Id")] public int TrainingClassId { get; set; }
         public TrainingClass TrainingClass { get; set; }
 
-        public DateTime Date { get; set; }
+        //public ICollection<TrainingClass> TrainingClasses { get; set; }
+        //public DateTime Date { get; set; }
 
     }
 }
