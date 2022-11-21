@@ -23,8 +23,14 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("rolecreation", policy =>
-        policy.RequireRole("Admin")
+    options.AddPolicy("adminrights", policy =>
+        policy.RequireRole("Admin")      
+    );
+    options.AddPolicy("userrights", policy =>
+    policy.RequireRole("Bruger")
+    );
+    options.AddPolicy("superuserrights", policy =>
+    policy.RequireRole("Superbruger")
     );
 });
 

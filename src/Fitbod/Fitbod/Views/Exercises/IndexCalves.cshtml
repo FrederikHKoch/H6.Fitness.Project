@@ -47,7 +47,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Image)
+                            <img src="~/img/exercises/@item.Image" class="rounded-square" height="50" width="75" style="border:1px" asp-append-version="true" accept="image/*" />
                         </td>
                     </tr>
                 }
