@@ -33,8 +33,6 @@ namespace Fitbod.Data
 
         public DbSet<WeekDay> WeekDay { get; set; }
 
-        public DbSet<WeeklyFoodPlan> WeeklyFoodPlan { get; set; }
-
         public DbSet<Fitbod.Models.TeamSignUp> TeamSignUp { get; set; }
 
         public DbSet<Fitbod.Models.TrainingClass> TrainingClass { get; set; }
@@ -80,6 +78,21 @@ namespace Fitbod.Data
                 new IdentityRole() { Id = SUPERBRUGER_ID, Name = "Superbruger", NormalizedName = "SUPERBRUGER" }
             );
 
+            modelBuilder.Entity<Dish>().HasData(
+                new Dish() {DishId = 1, Name = "Mexicansk lasagne" , Url = "https://mummum.dk/mexicansk-lasagne/"},
+                new Dish() {DishId = 2, Name = "Tarteletter" , Url = "https://mummum.dk/tarteletter-med-hoens-i-asparges/"},
+                new Dish() {DishId = 3, Name = "Tomatsuppe med bacon og frisk persille" , Url = "https://mummum.dk/tomatsuppe-med-bacon/"},
+                new Dish() {DishId = 4, Name = "Pasta med bacon, svampe og parmesan" , Url = "https://mummum.dk/pasta-med-bacon-svampe-og-parmesan/"},
+                new Dish() {DishId = 5, Name = "Bradepande-fajitas" , Url = "https://mummum.dk/bradepande-fajitas/"}
+            );
+
+            modelBuilder.Entity<WeekDay>().HasData(
+                new WeekDay() {WeekDayId = 1, Day = "0", DishId = 1},
+                new WeekDay() {WeekDayId = 2, Day = "1", DishId = 2},
+                new WeekDay() {WeekDayId = 3, Day = "2", DishId = 3},
+                new WeekDay() {WeekDayId = 4, Day = "3", DishId = 4},
+                new WeekDay() {WeekDayId = 5, Day = "4", DishId = 5}
+            );
             var user1 = new FitbodUser
             {
                 Id = USER_ID1,
