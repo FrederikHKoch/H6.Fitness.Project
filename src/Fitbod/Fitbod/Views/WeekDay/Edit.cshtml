@@ -1,3 +1,5 @@
+@using Fitbod.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Fitbod.Models.WeekDay
 
 @{
@@ -15,18 +17,13 @@
             <input type="hidden" asp-for="WeekDayId" />
             <div class="form-group">
                 <label asp-for="Day" class="control-label"></label>
-                <input asp-for="Day" class="form-control" />
+                <select asp-for="Day" class="form-control" asp-items="Html.GetEnumSelectList<WeekDayEnum>()"></select>
                 <span asp-validation-for="Day" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DishId" class="control-label"></label>
                 <select asp-for="DishId" class="form-control" asp-items="ViewBag.DishId"></select>
                 <span asp-validation-for="DishId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WfpId" class="control-label"></label>
-                <select asp-for="WfpId" class="form-control" asp-items="ViewBag.WfpId"></select>
-                <span asp-validation-for="WfpId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

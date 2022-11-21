@@ -18,9 +18,10 @@ namespace Fitbod.Controllers
         private readonly FitbodContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public ExercisesController(FitbodContext context)
+        public ExercisesController(FitbodContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         //public ExercisesController(IWebHostEnvironment env)

@@ -64,6 +64,17 @@ body {
     color: black;
 }
 
+.column_custom{
+    float: left;
+    width: 50%;
+    padding: 10px; 
+}
+.row_custom:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
     .column.side, .column.middle {
