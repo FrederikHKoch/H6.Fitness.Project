@@ -9,11 +9,8 @@ namespace Fitbod.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        [Range(1, 52)]
-        public int WeekNr { get; set; }
-        [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Date { get; set; }
+        public DateTime DateTime { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
@@ -21,9 +18,10 @@ namespace Fitbod.Models
         [Required]
         public string Trainer { get; set; }
         [Required]
+        [Range(1, 50)]
         public int MaxSignUp { get; set; }
         public int Signups { get; set; }
 
-
+        public ICollection<TeamSignUp> TeamSignUps { get; set; }
     }
 }

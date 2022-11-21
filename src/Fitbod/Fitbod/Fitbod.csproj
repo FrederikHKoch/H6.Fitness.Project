@@ -25,11 +25,20 @@
 
     <ItemGroup>
       <None Include="wwwroot\img\RunningManHomepage.jpg" />
+      <None Remove="Views\WeekDay\styling.css" />
     </ItemGroup>
     
     <ItemGroup>
       <Folder Include="Pages" />
       <Folder Include="wwwroot\img\exercises\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\WeeklyFoodPlan\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\WeeklyFoodPlan\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\WeeklyFoodPlan\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\WeeklyFoodPlan\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\WeeklyFoodPlan\Index.cshtml" />
     </ItemGroup>
     
 </Project>

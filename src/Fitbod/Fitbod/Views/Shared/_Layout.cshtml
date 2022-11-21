@@ -26,6 +26,9 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="ExercisePlans" asp-action="Index">Trænings Plan</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Exercises" asp-action="Index">Øvelser</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="TrainingClasses" asp-action="Index">Holdtræning</a>
                         </li>
                         <li class="nav-item">
@@ -34,14 +37,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ContactUs">Kontakt Os</a>
                         </li>
-                       <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="WeekDay" asp-action="Index">Madplan</a>
+                        </li>
                     </ul>
-                 <div class="col-md-2">
+                    </div>
+                <div class="col-md-2">
                     <partial name="_LoginPartial.cshtml" />
                 </div>
-            </div>
         </nav>
     </header>
     <div class="container">
