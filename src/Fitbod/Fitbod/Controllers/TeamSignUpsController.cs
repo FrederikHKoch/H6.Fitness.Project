@@ -34,7 +34,7 @@ namespace Fitbod.Controllers
             }
 
             var teamSignUp = await _context.TeamSignUp
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TeamSignUpId == id);
             if (teamSignUp == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date")] TeamSignUp teamSignUp)
+        public async Task<IActionResult> Create([Bind("TeamSignUpId")] TeamSignUp teamSignUp)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Fitbod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date")] TeamSignUp teamSignUp)
+        public async Task<IActionResult> Edit(int id, [Bind("TeamSignUpId")] TeamSignUp teamSignUp)
         {
-            if (id != teamSignUp.Id)
+            if (id != teamSignUp.TeamSignUpId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Fitbod.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TeamSignUpExists(teamSignUp.Id))
+                    if (!TeamSignUpExists(teamSignUp.TeamSignUpId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Fitbod.Controllers
             }
 
             var teamSignUp = await _context.TeamSignUp
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TeamSignUpId == id);
             if (teamSignUp == null)
             {
                 return NotFound();
@@ -155,7 +155,7 @@ namespace Fitbod.Controllers
 
         private bool TeamSignUpExists(int id)
         {
-          return _context.TeamSignUp.Any(e => e.Id == id);
+          return _context.TeamSignUp.Any(e => e.TeamSignUpId == id);
         }
     }
 }

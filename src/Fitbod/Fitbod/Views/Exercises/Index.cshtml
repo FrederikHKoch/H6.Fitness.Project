@@ -55,11 +55,16 @@
                             <img src="~/img/exercises/@item.Image" class="rounded-square" height="50" width="75" style="border:1px" asp-append-version="true" accept="image/*" />
                             @*@Html.DisplayFor(modelItem => item.Image)*@
                         </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
-                        </td>
+                        @{
+                            if (User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
+                                </td>
+                            }
+                        }
                     </tr>
                 }
             </tbody>
