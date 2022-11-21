@@ -4,44 +4,36 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Mad Plan</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Day)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WeeklyFoodPlan)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dish.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeeklyFoodPlan.WfpId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WeekDayId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WeekDayId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WeekDayId">Delete</a>
-            </td>
-        </tr>
+@{
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create">Ny madplan</a>
+        </p>
+        <p>
+            <a asp-area="" asp-controller="Dish" asp-action="Index">Retter</a>
+        </p>
+    }
 }
-    </tbody>
-</table>
+
+@foreach (var item in Model) {
+    <tr>
+        <div class="row_custom">
+            <div class="column_custom" style="background-color:white;">
+                <h2>@Html.DisplayFor(modelItem => item.Day)</h2>
+                <a href="@Html.DisplayFor(modelItem => item.Dish.Url)">@Html.DisplayFor(modelItem => item.Dish.Name)</a>
+                <br/>
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.WeekDayId">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.WeekDayId">Delete</a>       
+                    }
+                }
+            </div>
+            <br/>
+        </div>
+    </tr>
+}
