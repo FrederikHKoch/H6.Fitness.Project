@@ -21,7 +21,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: WeekDay
-        public async Task<IActionResult> Index()
+        public Task<IActionResult> Index()
         {
             var fitbodContext = _context.WeekDay.Include(w => w.Dish).OrderBy(o=>o.Day).ToList();
             foreach (var item in fitbodContext)
@@ -62,10 +62,10 @@ namespace Fitbod.Controllers
             
             }
             
-            return View(fitbodContext);
+            return Task.FromResult<IActionResult>(View(fitbodContext));
         }
 
-
+        [Authorize(Policy = "adminrights")]
         // GET: WeekDay/Create
         public IActionResult Create()
         {
@@ -73,6 +73,7 @@ namespace Fitbod.Controllers
             return View();
         }
 
+        [Authorize(Policy = "adminrights")]
         // POST: WeekDay/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -120,28 +121,7 @@ namespace Fitbod.Controllers
             return View(WeekDay);
         }
 
-        public async Task Test(WeekDay weekDay)
-        {
-            var fitbodContext = _context.WeekDay.Include(w => w.Dish).OrderBy(o=>o.Day).ToList();
-            bool test = false;
-            foreach (var item in fitbodContext)
-            {
-                if (item.Day == weekDay.Day)
-                {
-                    test = true;
-                }
-            }
-
-            if (!test)
-            {
-                Create(weekDay);
-            }
-            else
-            {
-                
-            }
-        }
-        
+        [Authorize(Policy = "adminrights")]
         // GET: WeekDay/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -150,15 +130,16 @@ namespace Fitbod.Controllers
                 return NotFound();
             }
 
-            var WeekDay = await _context.WeekDay.FindAsync(id);
-            if (WeekDay == null)
+            var weekDay = await _context.WeekDay.FindAsync(id);
+            if (weekDay == null)
             {
                 return NotFound();
             }
-            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
-            return View(WeekDay);
+            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", weekDay.DishId);
+            return View(weekDay);
         }
 
+        [Authorize(Policy = "adminrights")]
         // POST: WeekDay/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -195,6 +176,7 @@ namespace Fitbod.Controllers
             return View(WeekDay);
         }
 
+        [Authorize(Policy = "adminrights")]
         // GET: WeekDay/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -214,6 +196,7 @@ namespace Fitbod.Controllers
             return View(WeekDay);
         }
 
+        [Authorize(Policy = "adminrights")]
         // POST: WeekDay/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
