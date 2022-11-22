@@ -8,6 +8,7 @@
     <div class="column side">
         <h6>Muskelgruppe</h6>
         <ol class="ol_exercise_custom">
+            <li><a class="a_exercise_custom" href="/Exercises/Index">Alle</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexBiceps">Bicep</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexHamstring">Baglår</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexCalves">Læg</a></li>
@@ -19,21 +20,29 @@
         </ol>
     </div>
     <div class="column middle">
-        <h1>Index</h1>
+        <h1>Øvelser</h1>
+        @{
+            if (User.IsInRole("Admin"))
+            {
+                <p>
+                    <a asp-action="Create">Opret ny øvelse</a>
+                </p>
+            }
+        }
         <table class="table">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayName("Navn")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Description)
+                        @Html.DisplayName("Beskrivelse")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Musclegroup)
+                        @Html.DisplayName("Muskelgruppe")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Image)
+                        @Html.DisplayName("Billede")
                     </th>
                     <th></th>
                 </tr>
@@ -59,9 +68,8 @@
                             if (User.IsInRole("Admin"))
                             {
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.ExerciseId">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.ExerciseId">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ExerciseId">Delete</a>
+                                    <a asp-action="Edit" asp-route-id="@item.ExerciseId">Ændre</a> |                                   
+                                    <a asp-action="Delete" asp-route-id="@item.ExerciseId">Slet</a>
                                 </td>
                             }
                         }

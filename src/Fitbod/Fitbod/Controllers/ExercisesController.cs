@@ -93,21 +93,6 @@ namespace Fitbod.Controllers
             return View();
         }
 
-        // POST: Exercises/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ExerciseId,Name,Musclegroup,Description,Image")] Exercise exercise)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(exercise);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(exercise);
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateExercise(ExercisesViewModel model, IFormFile image)
@@ -158,7 +143,7 @@ namespace Fitbod.Controllers
             return View(exercise);
         }
 
-        // POST: Exercises/Edit/5
+        //POST: Exercises/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
