@@ -8,6 +8,7 @@
     <div class="column side">
         <h6>Muskelgruppe</h6>
         <ol class="ol_exercise_custom">
+            <li><a class="a_exercise_custom" href="/Exercises/Index">Alle</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexBiceps">Bicep</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexHamstring">Baglår</a></li>
             <li><a class="a_exercise_custom" href="/Exercises/IndexCalves">Læg</a></li>
@@ -19,19 +20,19 @@
         </ol>
     </div>
     <div class="column middle">
-        <h1>Index</h1>
+        <h1>Øvelser - Læg</h1>
         <p>custom message om musklegruppen</p>
         <table class="table">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayName("Navn")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Description)
+                        @Html.DisplayName("Beskrivelse")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Image)
+                        @Html.DisplayName("Billede")
                     </th>
                     <th></th>
                 </tr>

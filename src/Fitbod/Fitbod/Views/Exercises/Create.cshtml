@@ -4,51 +4,44 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Tilføj øvelse</h1>
 
-<h4>Exercise</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateExercise" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Exercises.Name" class="control-label"></label>
+                <label asp-for="Exercises.Name" class="control-label">Navn</label>
                 <input asp-for="Exercises.Name" class="form-control" />
                 <span asp-validation-for="Exercises.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Exercises.Musclegroup" class="control-label"></label>
+                <label asp-for="Exercises.Musclegroup" class="control-label">Muskelgruppe</label>
                 <input asp-for="Exercises.Musclegroup" class="form-control" />
                 <span asp-validation-for="Exercises.Musclegroup" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Exercises.Description" class="control-label"></label>
+                <label asp-for="Exercises.Description" class="control-label">Beskrivelse</label>
                 <input asp-for="Exercises.Description" class="form-control" />
                 <span asp-validation-for="Exercises.Description" class="text-danger"></span>
             </div>
-            <label class="col-md-2 control-label">Image</label>
+            <label class="col-md-2 control-label">Billede</label>
             <div class="col-md-10">
                 <div id="chooseFile">
                     <input class="form-control" type="file" name="image" accept=".png, .jpeg, .jpg" />
                 </div>
             </div>
-
-
-            @*<div class="form-group">
-                <label asp-for="Exercises.Image" class="control-label"></label>
-                <input asp-for="Exercises.Image" class="form-control" />
-                <span asp-validation-for="Exercises.Image" class="text-danger"></span>
-            </div>*@
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tilbage til øvelsesoversigt</a>
 </div>
 
 @section Scripts {
