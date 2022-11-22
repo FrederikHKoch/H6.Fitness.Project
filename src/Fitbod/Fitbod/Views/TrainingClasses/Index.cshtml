@@ -7,7 +7,6 @@
 <h1>Holdtræning</h1>
 
 
-
 @{
     if (User.IsInRole("Admin"))
     {
@@ -16,6 +15,9 @@
         </p>
     }
 }
+<div>
+    <a asp-action="UserSignupsIndex">Se tilmeldinger</a>
+</div>
 
 <div>
     <p class="alert-danger col-6">@ViewData["FullTeamerror"]</p>
