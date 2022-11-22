@@ -32,6 +32,16 @@ namespace Fitbod.Controllers
             return View(await _context.TrainingClass.ToListAsync());
         }
 
+        // GET: TeamSignups
+        public async Task<IActionResult> UserSignupsIndex()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var trainingclassentries = await _context.TeamSignUp.Include(x => x.TrainingClass).Where(x => x.FitbodUser.Id == user.Id).ToListAsync();       
+
+            return View("../TeamSignUps/Index", trainingclassentries);
+        }
+
         //GET: TeamSignUps/Create
         public async Task<IActionResult> TrainingClassSignup()
         {
