@@ -13,7 +13,7 @@
     <dl class="row">
     </dl>
     
-    <form asp-action="DeleteSignup">
+    <form asp-controller="TrainingClasses" asp-action="DeleteSignup">
         <input type="hidden" asp-for="TeamSignUpId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
