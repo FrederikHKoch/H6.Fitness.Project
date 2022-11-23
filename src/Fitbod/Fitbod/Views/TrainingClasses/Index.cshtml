@@ -16,7 +16,7 @@
     }
 }
 <div>
-    <a asp-action="UserSignupsIndex">Se tilmeldinger</a>
+    <a asp-action="SignupIndex">Se tilmeldinger</a>
 </div>
 
 <div>
@@ -78,16 +78,15 @@
                     @Html.DisplayFor(modelItem => item.Signups)
                 </td>
                 <td>
-                    <a asp-action="TrainingClassSignup" asp-route-id="@item.Id">Tilmeld</a> |
-                    <a asp-action="DeleteSignup" asp-route-id="@item.Id">Afmeld</a>
+                    <a asp-action="SignupCreate" asp-route-id="@item.Id">Tilmeld</a> |
+                    <a asp-action="SignupDelete" asp-route-id="@item.Id">Afmeld</a>
                 </td>
                 @{
                     if (User.IsInRole("Admin"))
                     {
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Ændre</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Slet</a>
                         </td>
                     }
                 }

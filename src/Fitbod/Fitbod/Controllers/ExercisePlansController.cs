@@ -26,133 +26,26 @@ namespace Fitbod.Controllers
             _context = context;
         }
 
+        #region ExercisePlan
         // GET: ExercisePlans
         public async Task<IActionResult> Index()
         {
-            // TODO: Lav det om til logget-ind bruger
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var exercisePlanId = _context.ExercisePlan.Where(x => x.FitbodUser.Id == user.Id);
             return View(await exercisePlanId.ToListAsync());
         }
-
-        // GET: ExercisePlans/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ExercisePlan == null)
-            {
-                return NotFound();
-            }
-
-            var exercisePlan = await _context.ExercisePlan
-                .FirstOrDefaultAsync(m => m.ExercisePlanId == id);
-            if (exercisePlan == null)
-            {
-                return NotFound();
-            }
-
-            return View(exercisePlan);
-        }
-
-        // GET: ExercisePlanEntryDetails/5
-        public IActionResult ExercisePlanEntryDetails(int? id)
-        {
-            var exerciseplan = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
-
-            if (id == null || _context.ExercisePlanEntry == null)
-            {
-                return NotFound();
-            }
-
-            var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
-
-            if (exercisePlanEntry == null)
-            {
-                return NotFound();
-            }
-            //Check if day is a number in database
-            foreach (var item in exercisePlanEntry)
-            {
-                int dayEnum = 0;
-                
-
-                if (int.TryParse(item.Day, out dayEnum))
-                {
-                    switch (dayEnum)
-                    {
-                        case 0:
-                            item.Day = "Mandag";
-                            break;
-                        case 1:
-                            item.Day = "Tirsdag";
-                            break;
-                        case 2:
-                            item.Day = "Onsdag";
-                            break;
-                        case 3:
-                            item.Day = "Torsdag";
-                            break;
-                        case 4:
-                            item.Day = "Fredag";
-                            break;
-                        case 5:
-                            item.Day = "Lørdag";
-                            break;
-                        case 6:
-                            item.Day = "Søndag";
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                }
-
-            }
-
-            return View("../ExercisePlanEntries/Index", exercisePlanEntry);
-        }
-
+        
         // GET: ExercisePlans/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // GET: ExercisePlans/AddExercise
-        public IActionResult AddExercise(int? id)
-        {
-
-            ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name");
-            var exerciseplanid = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
-            ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exerciseplanid.ExercisePlanId);
-            return View("../ExercisePlanEntries/Create");
-        }
-
-        // POST: ExercisePlanEntries/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePlanEntry([Bind("EntryId,Repetitions,Sets,Day,ExerciseId,ExercisePlanId")] ExercisePlanEntry exercisePlanEntry)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(exercisePlanEntry);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name", exercisePlanEntry.ExerciseId);
-            return View(exercisePlanEntry);
-        }
-
         // POST: ExercisePlans/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] ExercisePlan exercisePlan)
         {
-            // TODO: Lav det om til logget-ind bruger
             var user = await _userManager.GetUserAsync(HttpContext.User);
             exercisePlan.FitbodUser = user;
 
@@ -163,109 +56,7 @@ namespace Fitbod.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(exercisePlan);
-        }
-
-        // GET: ExercisePlans/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.ExercisePlan == null)
-            {
-                return NotFound();
-            }
-
-            var exercisePlan = await _context.ExercisePlan.FindAsync(id);
-            if (exercisePlan == null)
-            {
-                return NotFound();
-            }
-            return View(exercisePlan);
-        }
-
-        // POST: ExercisePlans/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ExercisePlanId,Name")] ExercisePlan exercisePlan)
-        {
-            if (id != exercisePlan.ExercisePlanId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(exercisePlan);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExercisePlanExists(exercisePlan.ExercisePlanId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(exercisePlan);
-        }
-
-        // GET: ExercisePlanEntries/Edit/5
-        public async Task<IActionResult> EntryEdit(int? id)
-        {
-            if (id == null || _context.ExercisePlanEntry == null)
-            {
-                return NotFound();
-            }
-
-            var exercisePlanEntry = await _context.ExercisePlanEntry.FindAsync(id);
-            if (exercisePlanEntry == null)
-            {
-                return NotFound();
-            }
-            return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
-        }
-
-        // POST: ExercisePlanEntries/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EntryEdit(int id, [Bind("EntryId,Repetitions,Sets,Day,ExerciseId,ExercisePlanId")] ExercisePlanEntry exercisePlanEntry)
-        {
-
-            if (id != exercisePlanEntry.EntryId)
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(exercisePlanEntry);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExercisePlanEntryExists(exercisePlanEntry.EntryId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
-        }
+        }        
 
         // GET: ExercisePlans/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -303,6 +94,141 @@ namespace Fitbod.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        private bool ExercisePlanExists(int id)
+        {
+            return _context.ExercisePlan.Any(e => e.ExercisePlanId == id);
+        }
+        #endregion
+
+        #region Entry
+        // GET: EntryIndex/5
+        public IActionResult EntryIndex(int? id)
+        {
+            var exerciseplan = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
+
+            if (id == null || _context.ExercisePlanEntry == null)
+            {
+                return NotFound();
+            }
+
+            var exercisePlanEntry = _context.ExercisePlanEntry
+                .Include(u => u.Exercise)
+                .Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
+
+            if (exercisePlanEntry == null)
+            {
+                return NotFound();
+            }
+            foreach (var item in exercisePlanEntry)
+            {
+                int dayEnum = 0;
+                
+                if (int.TryParse(item.Day, out dayEnum))
+                {
+                    switch (dayEnum)
+                    {
+                        case 0:
+                            item.Day = "Mandag";
+                            break;
+                        case 1:
+                            item.Day = "Tirsdag";
+                            break;
+                        case 2:
+                            item.Day = "Onsdag";
+                            break;
+                        case 3:
+                            item.Day = "Torsdag";
+                            break;
+                        case 4:
+                            item.Day = "Fredag";
+                            break;
+                        case 5:
+                            item.Day = "Lørdag";
+                            break;
+                        case 6:
+                            item.Day = "Søndag";
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+            return View("../ExercisePlanEntries/Index", exercisePlanEntry);
+        }
+
+        // GET: ExercisePlans/EntryCreate
+        public IActionResult EntryCreate(int? id)
+        {
+            ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name");
+            var exerciseplanid = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
+            ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exerciseplanid.ExercisePlanId);
+            return View("../ExercisePlanEntries/Create");
+        }
+
+        // POST: ExercisePlans/EntryCreate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EntryCreate([Bind("EntryId,Repetitions,Sets,Day,ExerciseId,ExercisePlanId")] ExercisePlanEntry exercisePlanEntry)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(exercisePlanEntry);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name", exercisePlanEntry.ExerciseId);
+            return View(exercisePlanEntry);
+        }    
+
+        // GET: ExercisePlanEntries/Edit/5
+        public async Task<IActionResult> EntryEdit(int? id)
+        {
+            if (id == null || _context.ExercisePlanEntry == null)
+            {
+                return NotFound();
+            }
+
+            var exercisePlanEntry = await _context.ExercisePlanEntry.FindAsync(id);
+            if (exercisePlanEntry == null)
+            {
+                return NotFound();
+            }
+            return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
+        }
+
+        // POST: ExercisePlanEntries/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EntryEdit(int id, [Bind("EntryId,Repetitions,Sets,Day,ExerciseId,ExercisePlanId")] ExercisePlanEntry exercisePlanEntry)
+        {
+
+            if (id != exercisePlanEntry.EntryId)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(exercisePlanEntry);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ExercisePlanEntryExists(exercisePlanEntry.EntryId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
+        }        
 
         // GET: ExercisePlanEntries/Delete/5
         public async Task<IActionResult> EntryDelete(int? id)
@@ -340,14 +266,11 @@ namespace Fitbod.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool ExercisePlanExists(int id)
-        {
-            return _context.ExercisePlan.Any(e => e.ExercisePlanId == id);
-        }
+        
         private bool ExercisePlanEntryExists(int id)
         {
             return _context.ExercisePlanEntry.Any(e => e.EntryId == id);
         }
+        #endregion
     }
 }

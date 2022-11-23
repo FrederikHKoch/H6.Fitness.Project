@@ -26,8 +26,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="AddExercise" asp-route-id="@item.ExercisePlanId">Tilføj Øvelse</a>
-                <a asp-action="ExercisePlanEntryDetails" asp-route-id="@item.ExercisePlanId">Åben Plan</a> |
+                    <a asp-action="EntryCreate" asp-route-id="@item.ExercisePlanId">Tilføj Øvelse</a>
+                    <a asp-action="EntryIndex" asp-route-id="@item.ExercisePlanId">Åben Plan</a> |
                 <a asp-action="Delete" asp-route-id="@item.ExercisePlanId">Slet Plan</a>
             </td>
         </tr>
