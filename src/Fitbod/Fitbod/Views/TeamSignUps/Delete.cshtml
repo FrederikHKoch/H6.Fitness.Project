@@ -10,9 +10,8 @@
 <div>
     <hr />
     <dl class="row">
-    </dl>
-    
-    <form asp-action="SignupDelete">
+    </dl>  
+    <form asp-controller="TrainingClasses" asp-action="SignupDelete">
         <input type="hidden" asp-for="TeamSignUpId" />
         <input type="submit" value="Afmeld" class="btn btn-danger" /> |
         <a asp-action="Index">Fortryd</a>

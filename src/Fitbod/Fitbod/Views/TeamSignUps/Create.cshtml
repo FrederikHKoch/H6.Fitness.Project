@@ -9,11 +9,11 @@
 <h4>Er du fuldstændig sikker på du vil tilmelde dig dette hold?</h4>
 <hr />
 <div>
-    <p>Hvis ja tryk på knappen nedenfor</>
+    <p>Hvis ja tryk på knappen nedenfor</p>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="SignupCreate">
+        <form asp-controller="TrainingClasses" asp-action="SignupCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input type="submit" value="Ja" class="btn btn-primary" />
