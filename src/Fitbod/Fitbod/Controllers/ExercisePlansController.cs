@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fitbod.Data;
 using Fitbod.Models;
 using Fitbod.Areas.Identity.Data;
-using Fitbod.Areas.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
@@ -64,18 +59,11 @@ namespace Fitbod.Controllers
             }
 
             var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
-
-            if (exercisePlanEntry == null)
-            {
-                return NotFound();
-            }
+            
             //Check if day is a number in database
             foreach (var item in exercisePlanEntry)
             {
-                int dayEnum = 0;
-                
-
-                if (int.TryParse(item.Day, out dayEnum))
+                if (int.TryParse(item.Day, out var dayEnum))
                 {
                     switch (dayEnum)
                     {
@@ -100,9 +88,6 @@ namespace Fitbod.Controllers
                         case 6:
                             item.Day = "Søndag";
                             break;
-
-                        default:
-                            break;
                     }
 
                 }
@@ -124,7 +109,7 @@ namespace Fitbod.Controllers
 
             ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name");
             var exerciseplanid = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
-            ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exerciseplanid.ExercisePlanId);
+            ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exerciseplanid!.ExercisePlanId);
             return View("../ExercisePlanEntries/Create");
         }
 

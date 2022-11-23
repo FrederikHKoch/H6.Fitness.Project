@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EntryEdit">
+        <form asp-controller="ExercisePlans" asp-action="EntryEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EntryId" />
             <div class="form-group">
@@ -38,7 +38,7 @@
 </div>
 
 <div>
-    <a asp-action="ExercisePlanEntryDetails" asp-route-id="@Model?.ExercisePlanId">Tilbage til Oversigt</a>
+    <a asp-controller="ExercisePlans" asp-action="ExercisePlanEntryDetails" asp-route-id="@Model?.ExercisePlanId">Tilbage til Oversigt</a>
 </div>
 
 @section Scripts {
