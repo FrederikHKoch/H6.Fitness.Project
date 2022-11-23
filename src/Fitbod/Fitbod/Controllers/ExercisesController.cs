@@ -24,12 +24,6 @@ namespace Fitbod.Controllers
             _env = env;
         }
 
-        //public ExercisesController(IWebHostEnvironment env)
-        //{
-        //    _env = env;
-        //}
-
-
         // GET: Exercises
         public async Task<IActionResult> Index()
         {
@@ -69,24 +63,7 @@ namespace Fitbod.Controllers
         {
             return View(await _context.Exercise.Where(x => x.Musclegroup == "Triceps").ToListAsync());
         }
-        // GET: Exercises/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Exercise == null)
-            {
-                return NotFound();
-            }
-
-            var exercise = await _context.Exercise
-                .FirstOrDefaultAsync(m => m.ExerciseId == id);
-            if (exercise == null)
-            {
-                return NotFound();
-            }
-
-            return View(exercise);
-        }
-
+        
         // GET: Exercises/Create
         public IActionResult Create()
         {

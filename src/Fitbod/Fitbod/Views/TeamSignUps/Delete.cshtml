@@ -4,18 +4,16 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Afmeld</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Er du sikker på at du vil afmelde dig?</h3>
 <div>
-    <h4>TeamSignUp</h4>
     <hr />
     <dl class="row">
-    </dl>
-    
-    <form asp-controller="TrainingClasses" asp-action="DeleteSignup">
+    </dl>  
+    <form asp-controller="TrainingClasses" asp-action="SignupDelete">
         <input type="hidden" asp-for="TeamSignUpId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Afmeld" class="btn btn-danger" /> |
+        <a asp-action="Index">Fortryd</a>
     </form>
 </div>

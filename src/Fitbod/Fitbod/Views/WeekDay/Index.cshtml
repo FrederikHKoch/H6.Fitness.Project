@@ -28,8 +28,7 @@
                 @{
                     if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="Edit" asp-route-id="@item.WeekDayId">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.WeekDayId">Delete</a>       
+                        <a asp-action="Delete" asp-route-id="@item.WeekDayId">Slet</a>       
                     }
                 }
             </div>

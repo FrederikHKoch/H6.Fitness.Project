@@ -75,8 +75,6 @@ namespace Fitbod.Controllers
 
         [Authorize(Policy = "adminrights")]
         // POST: WeekDay/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("WeekDayId,Day,DishId,WfpId")] WeekDay WeekDay)
@@ -119,62 +117,7 @@ namespace Fitbod.Controllers
             ViewData["Error"] = errorMessage;
             ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
             return View(WeekDay);
-        }
-
-        [Authorize(Policy = "adminrights")]
-        // GET: WeekDay/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.WeekDay == null)
-            {
-                return NotFound();
-            }
-
-            var weekDay = await _context.WeekDay.FindAsync(id);
-            if (weekDay == null)
-            {
-                return NotFound();
-            }
-            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", weekDay.DishId);
-            return View(weekDay);
-        }
-
-        [Authorize(Policy = "adminrights")]
-        // POST: WeekDay/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WeekDayId,Day,DishId,WfpId")] WeekDay WeekDay)
-        {
-            if (id != WeekDay.WeekDayId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(WeekDay);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WeekDayModelExists(WeekDay.WeekDayId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
-            return View(WeekDay);
-        }
+        }        
 
         [Authorize(Policy = "adminrights")]
         // GET: WeekDay/Delete/5

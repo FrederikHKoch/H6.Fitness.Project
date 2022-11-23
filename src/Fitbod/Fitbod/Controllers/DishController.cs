@@ -25,24 +25,6 @@ namespace Fitbod.Controllers
               return View(await _context.Dish.ToListAsync());
         }
 
-        // GET: Dish/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Dish == null)
-            {
-                return NotFound();
-            }
-
-            var Dish = await _context.Dish
-                .FirstOrDefaultAsync(m => m.DishId == id);
-            if (Dish == null)
-            {
-                return NotFound();
-            }
-
-            return View(Dish);
-        }
-
         // GET: Dish/Create
         public IActionResult Create()
         {
@@ -50,8 +32,6 @@ namespace Fitbod.Controllers
         }
 
         // POST: Dish/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DishId,Name,Url")] Dish Dish)
@@ -82,8 +62,6 @@ namespace Fitbod.Controllers
         }
 
         // POST: Dish/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DishId,Name,Url")] Dish Dish)
