@@ -7,12 +7,18 @@ namespace Fitbod.Models
     {
         [Key]
         public int ExerciseId { get; set; }
-        [Required(ErrorMessage = "Indtast navn")] 
-        public string Name { get; set; }
+
         [Required(ErrorMessage = "Indtast navn")]
+        [StringLength(50, ErrorMessage = "Navnet er for langt. Maks 50 tegn.")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Indtast Muskelgruppe")]
+        [StringLength(50, ErrorMessage = "Navnet er for langt. Maks 50 tegn.")]
         public string Musclegroup { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Indtast Beskrivelse")]
         public string Description { get; set; }
+
         [Required]
         public string Image { get; set; }
         public ICollection<ExercisePlanEntry> ExercisePlanEntry { get; set; }
