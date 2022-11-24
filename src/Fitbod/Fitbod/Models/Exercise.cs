@@ -7,9 +7,9 @@ namespace Fitbod.Models
     {
         [Key]
         public int ExerciseId { get; set; }
-        [Required] 
+        [Required(ErrorMessage = "Indtast navn")] 
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Indtast navn")]
         public string Musclegroup { get; set; }
         [Required]
         public string Description { get; set; }

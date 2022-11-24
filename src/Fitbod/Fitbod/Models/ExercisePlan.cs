@@ -8,7 +8,9 @@ namespace Fitbod.Models
     {
         [Key]
         public int ExercisePlanId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Indtast navn")]
+        [StringLength(50, ErrorMessage = "Navnet er for langt. Maks 25 tegn.")]
+
         public string Name { get; set; }
 
         [ForeignKey("Id")]

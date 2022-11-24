@@ -8,9 +8,12 @@ namespace Fitbod.Models
     {
         [Key]
         public int EntryId { get; set; }
+
         [Required]
+        [Range(1, 100)]
         public int Repetitions { get; set; }
         [Required]
+        [Range(1, 100)]
         public int Sets { get; set; }
         [Required]
         public string Day { get; set; }
