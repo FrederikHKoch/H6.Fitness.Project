@@ -29,6 +29,12 @@ namespace Fitbod.Controllers
             var exercisePlanId = _context.ExercisePlan.Where(x => x.FitbodUser.Id == user.Id);
             return View(await exercisePlanId.ToListAsync());
         }
+        
+        // GET: ExercisePlans/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         // GET: ExercisePlans/Create
         public IActionResult Create()
@@ -110,7 +116,6 @@ namespace Fitbod.Controllers
             {
                 return NotFound();
             }
-
             if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
             {
                 var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
@@ -151,7 +156,6 @@ namespace Fitbod.Controllers
             }
             return NotFound();
         }
-
         // GET: ExercisePlans/EntryCreate/5
         public async Task<IActionResult> EntryCreate(int? id)
         {
@@ -279,7 +283,7 @@ namespace Fitbod.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
         private bool ExercisePlanEntryExists(int id)
         {
             return _context.ExercisePlanEntry.Any(e => e.EntryId == id);
