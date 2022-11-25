@@ -35,13 +35,7 @@ namespace Fitbod.Controllers
         {
             return View();
         }
-
-        // GET: ExercisePlans/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
+        
         // POST: ExercisePlans/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
