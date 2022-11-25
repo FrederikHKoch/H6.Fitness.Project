@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fitbod.Controllers
 {
+    [Authorize]
     public class WeekDayController : Controller
     {
         private readonly FitbodContext _context;

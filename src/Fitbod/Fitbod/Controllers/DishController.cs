@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fitbod.Data;
 using Fitbod.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitbod.Controllers
 {
+    [Authorize(Policy = "adminrights")]
     public class DishController : Controller
     {
         private readonly FitbodContext _context;
