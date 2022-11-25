@@ -30,10 +30,14 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole("Bruger")
     );
     options.AddPolicy("superuserrights", policy =>
-        policy.RequireRole("Superbruger"));
-    
+        policy.RequireRole("Superbruger")
+    );    
     options.AddPolicy("allusersrigths", policy =>
-        policy.RequireRole("Superbruger", "Admin", "Bruger"));
+        policy.RequireRole("Superbruger", "Admin", "Bruger")
+    );
+    //options.AddPolicy("currentuserrights", policy => 
+    //policy.RequireUserName())
+
 });
 
 var app = builder.Build();

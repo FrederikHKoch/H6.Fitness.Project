@@ -14,9 +14,5 @@ namespace Fitbod.Models
 
         [ForeignKey("Id")] public int TrainingClassId { get; set; }
         public TrainingClass TrainingClass { get; set; }
-
-        //public ICollection<TrainingClass> TrainingClasses { get; set; }
-        //public DateTime Date { get; set; }
-
     }
 }

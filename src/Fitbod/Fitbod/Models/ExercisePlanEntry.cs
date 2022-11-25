@@ -8,9 +8,12 @@ namespace Fitbod.Models
     {
         [Key]
         public int EntryId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Indtast antal reps")]
+        [Range(1, 100, ErrorMessage ="Mellem 1 og 100")]
         public int Repetitions { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Indtast antal sets")]
+        [Range(1, 100, ErrorMessage ="Mellem 1 og 100")]
         public int Sets { get; set; }
         [Required]
         public string Day { get; set; }

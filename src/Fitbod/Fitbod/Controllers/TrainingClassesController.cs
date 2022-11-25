@@ -31,7 +31,7 @@ namespace Fitbod.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.TrainingClass.ToListAsync());
-        }     
+        }
 
         // GET: TrainingClasses/Create
         public IActionResult Create()
@@ -54,6 +54,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: TrainingClasses/Edit/5
+        [Authorize(Policy ="adminrights")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.TrainingClass == null)
@@ -71,6 +72,7 @@ namespace Fitbod.Controllers
 
         // POST: TrainingClasses/Edit/5
         [HttpPost]
+        [Authorize(Policy = "adminrights")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DateTime,Description,Room,Trainer,MaxSignUp,Signups")] TrainingClass trainingClass)
         {
@@ -103,6 +105,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: TrainingClasses/Delete/5
+        [Authorize(Policy = "adminrights")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.TrainingClass == null)
@@ -122,6 +125,7 @@ namespace Fitbod.Controllers
 
         // POST: TrainingClasses/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Policy = "adminrights")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -134,7 +138,7 @@ namespace Fitbod.Controllers
             {
                 _context.TrainingClass.Remove(trainingClass);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -156,11 +160,21 @@ namespace Fitbod.Controllers
             return View("../TeamSignUps/Index", trainingclassentries);
         }
 
-        //GET: TeamSignUps/Create
-        public async Task<IActionResult> SignupCreate()
+        //GET: TeamSignUps/Create/5
+        public async Task<IActionResult> SignupCreate(int? id)
         {
+            var trainingclass = await _context.TrainingClass.FirstOrDefaultAsync(x => x.Id == id);
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            return View("../TeamSignUps/Create");
+            if (trainingclass != null)
+            {
+                var teamsignupentry = await _context.TeamSignUp.FirstOrDefaultAsync(x => x.TrainingClassId == trainingclass.Id);
+
+                if (teamsignupentry != null)
+                {
+                    return View("../TeamSignUps/Create");
+                }
+            }
+            return NotFound();
         }
 
         // POST: TeamSignUps/Create
@@ -170,11 +184,8 @@ namespace Fitbod.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             teamSignUp.FitbodUser = user;
-
             var trainingclass = _context.TrainingClass.FirstOrDefault(x => x.Id == id);
-
             var alltrainingclass = _context.TrainingClass;
-
             var teamsignupentry = _context.TeamSignUp.FirstOrDefault(x => x.FitbodUser.Id == user.Id && x.TrainingClassId == trainingclass.Id);
 
             if (teamsignupentry == null && trainingclass.Signups < trainingclass.MaxSignUp)
@@ -211,15 +222,27 @@ namespace Fitbod.Controllers
             {
                 return NotFound();
             }
+
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var teamSignUp = await _context.TeamSignUp.Include(x => x.FitbodUser).Where(x => x.FitbodUser.Id == user.Id).FirstOrDefaultAsync(x => x.TrainingClassId == id);
+            var trainingclass = await _context.TrainingClass.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (teamSignUp == null || user.Id != teamSignUp.FitbodUser.Id)
+            if (trainingclass == null)
             {
-                var trainingclass = _context.TrainingClass;
+                return NotFound();
+            }
+
+            if (teamSignUp == null)
+            {
+                var trainingClasses = _context.TrainingClass;
                 TempData["AllReadySignedError"] = "Du er ikke tilmeldt";
                 ViewData["AllReadySignedError"] = TempData["AllReadySignedError"];
-                return View(nameof(Index), trainingclass.ToList());
+                return View(nameof(Index), trainingClasses.ToList());
+            }
+
+            if (user.Id != teamSignUp.FitbodUser.Id)
+            {
+                return NotFound();
             }
 
             return View("../TeamSignUps/Delete", teamSignUp);
@@ -255,7 +278,7 @@ namespace Fitbod.Controllers
 
         private bool TeamSignUpExists(int id)
         {
-          return _context.TeamSignUp.Any(e => e.TeamSignUpId == id);
+            return _context.TeamSignUp.Any(e => e.TeamSignUpId == id);
         }
         #endregion
     }

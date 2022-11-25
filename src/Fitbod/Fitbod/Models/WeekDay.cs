@@ -5,9 +5,14 @@ namespace Fitbod.Models;
 
 public class WeekDay
 {
-    [Key] public int WeekDayId { get; set; }
-    [Required] public string Day { get; set; }
+    [Key] 
+    public int WeekDayId { get; set; }
+
+    [Required] 
+    public string Day { get; set; }
     
     public int DishId { get; set; }
-    [ForeignKey("DishId")] public Dish Dish { get; set; }
+
+    [ForeignKey("DishId")] 
+    public Dish Dish { get; set; }
 }

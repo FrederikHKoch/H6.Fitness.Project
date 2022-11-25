@@ -36,6 +36,12 @@ namespace Fitbod.Controllers
             return View();
         }
 
+        // GET: ExercisePlans/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         // POST: ExercisePlans/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,24 +57,28 @@ namespace Fitbod.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(exercisePlan);
-        }        
+        }
 
         // GET: ExercisePlans/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var exercisePlan = await _context.ExercisePlan.FirstOrDefaultAsync(m => m.ExercisePlanId == id);
+
             if (id == null || _context.ExercisePlan == null)
             {
                 return NotFound();
             }
-
-            var exercisePlan = await _context.ExercisePlan
-                .FirstOrDefaultAsync(m => m.ExercisePlanId == id);
-            if (exercisePlan == null)
+            if (exercisePlan.FitbodUser != null && exercisePlan.FitbodUser.Id == user.Id)
             {
-                return NotFound();
-            }
+                if (exercisePlan == null)
+                {
+                    return NotFound();
+                }
 
-            return View(exercisePlan);
+                return View(exercisePlan);
+            }
+            return NotFound();
         }
 
         // POST: ExercisePlans/Delete/5
@@ -97,60 +107,68 @@ namespace Fitbod.Controllers
 
         #region Entry
         // GET: EntryIndex/5
-        public IActionResult EntryIndex(int? id)
+        public async Task<IActionResult> EntryIndex(int? id)
         {
-            var exerciseplan = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var exerciseplan = await _context.ExercisePlan.FirstOrDefaultAsync(x => x.ExercisePlanId == id);
 
             if (id == null || _context.ExercisePlanEntry == null)
             {
                 return NotFound();
             }
-
-
-            var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
-            
-            //Check if day is a number in database
-            foreach (var item in exercisePlanEntry)
+            if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
             {
-                if (int.TryParse(item.Day, out var dayEnum))
+                var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
 
+                //Check if day is a number in database
+                foreach (var item in exercisePlanEntry)
                 {
-                    switch (dayEnum)
+                    if (int.TryParse(item.Day, out var dayEnum))
+
                     {
-                        case 0:
-                            item.Day = "Mandag";
-                            break;
-                        case 1:
-                            item.Day = "Tirsdag";
-                            break;
-                        case 2:
-                            item.Day = "Onsdag";
-                            break;
-                        case 3:
-                            item.Day = "Torsdag";
-                            break;
-                        case 4:
-                            item.Day = "Fredag";
-                            break;
-                        case 5:
-                            item.Day = "Lørdag";
-                            break;
-                        case 6:
-                            item.Day = "Søndag";
-                            break;
+                        switch (dayEnum)
+                        {
+                            case 0:
+                                item.Day = "Mandag";
+                                break;
+                            case 1:
+                                item.Day = "Tirsdag";
+                                break;
+                            case 2:
+                                item.Day = "Onsdag";
+                                break;
+                            case 3:
+                                item.Day = "Torsdag";
+                                break;
+                            case 4:
+                                item.Day = "Fredag";
+                                break;
+                            case 5:
+                                item.Day = "Lørdag";
+                                break;
+                            case 6:
+                                item.Day = "Søndag";
+                                break;
+                        }
                     }
                 }
+                return View("../ExercisePlanEntries/Index", exercisePlanEntry);
             }
-            return View("../ExercisePlanEntries/Index", exercisePlanEntry);
+            return NotFound();
         }
-
-        // GET: ExercisePlans/EntryCreate
-        public IActionResult EntryCreate(int? id)
+        // GET: ExercisePlans/EntryCreate/5
+        public async Task<IActionResult> EntryCreate(int? id)
         {
-            ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name");
-            var exerciseplanid = _context.ExercisePlan.FirstOrDefault(x => x.ExercisePlanId == id);
-            ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exerciseplanid!.ExercisePlanId);
-            return View("../ExercisePlanEntries/Create");
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var exercisePlan = await _context.ExercisePlan.FirstOrDefaultAsync(x => x.ExercisePlanId == id);
+
+            if (exercisePlan.FitbodUser != null && exercisePlan.FitbodUser.Id == user.Id)
+            {
+                ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name");
+                ViewData["ExercisePlanId"] = new SelectList(_context.Set<ExercisePlan>().Where(x => x.ExercisePlanId == id), "ExercisePlanId", "Name", exercisePlan!.ExercisePlanId);
+                return View("../ExercisePlanEntries/Create");
+            }
+            return NotFound();
         }
 
         // POST: ExercisePlans/EntryCreate
@@ -166,22 +184,29 @@ namespace Fitbod.Controllers
             }
             ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name", exercisePlanEntry.ExerciseId);
             return View(exercisePlanEntry);
-        }    
+        }
 
         // GET: ExercisePlanEntries/Edit/5
         public async Task<IActionResult> EntryEdit(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var exercisePlanEntry = await _context.ExercisePlanEntry.FindAsync(id);
+            var exerciseplan = await _context.ExercisePlan.FindAsync(exercisePlanEntry.ExercisePlanId);
+
             if (id == null || _context.ExercisePlanEntry == null)
             {
                 return NotFound();
             }
 
-            var exercisePlanEntry = await _context.ExercisePlanEntry.FindAsync(id);
-            if (exercisePlanEntry == null)
+            if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
             {
-                return NotFound();
+                if (exercisePlanEntry == null)
+                {
+                    return NotFound();
+                }
+                return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
             }
-            return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
+            return NotFound();
         }
 
         // POST: ExercisePlanEntries/Edit/5
@@ -215,24 +240,29 @@ namespace Fitbod.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
-        }        
+        }
 
         // GET: ExercisePlanEntries/Delete/5
         public async Task<IActionResult> EntryDelete(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var exercisePlanEntry = await _context.ExercisePlanEntry.FirstOrDefaultAsync(m => m.EntryId == id);
+            var exerciseplan = await _context.ExercisePlan.FindAsync(exercisePlanEntry.ExercisePlanId);
+
             if (id == null || _context.ExercisePlanEntry == null)
             {
                 return NotFound();
             }
-
-            var exercisePlanEntry = await _context.ExercisePlanEntry
-                .FirstOrDefaultAsync(m => m.EntryId == id);
-            if (exercisePlanEntry == null)
+            if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
             {
-                return NotFound();
-            }
+                if (exercisePlanEntry == null)
+                {
+                    return NotFound();
+                }
 
-            return View("../ExercisePlanEntries/Delete", exercisePlanEntry);
+                return View("../ExercisePlanEntries/Delete", exercisePlanEntry);
+            }
+            return NotFound();
         }
 
         // POST: ExercisePlanEntries/Delete/5

@@ -10,6 +10,7 @@ using Fitbod.Models;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.Metrics;
 using Fitbod.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitbod.Controllers
 {
@@ -63,13 +64,15 @@ namespace Fitbod.Controllers
         {
             return View(await _context.Exercise.Where(x => x.Musclegroup == "Triceps").ToListAsync());
         }
-        
+
         // GET: Exercises/Create
+        [Authorize(Policy = "adminrights")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Policy = "adminrights")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateExercise(ExercisesViewModel model, IFormFile image)
@@ -105,6 +108,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: Exercises/Edit/5
+        [Authorize(Policy = "adminrights")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Exercise == null)
@@ -121,8 +125,7 @@ namespace Fitbod.Controllers
         }
 
         //POST: Exercises/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "adminrights")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ExerciseId,Name,Musclegroup,Description,Image")] Exercise exercise)
@@ -156,6 +159,7 @@ namespace Fitbod.Controllers
         }
 
         // GET: Exercises/Delete/5
+        [Authorize(Policy = "adminrights")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Exercise == null)
@@ -174,6 +178,7 @@ namespace Fitbod.Controllers
         }
 
         // POST: Exercises/Delete/5
+        [Authorize(Policy = "adminrights")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
