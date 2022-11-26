@@ -29,13 +29,13 @@ namespace Fitbod.Controllers
             var exercisePlanId = _context.ExercisePlan.Where(x => x.FitbodUser.Id == user.Id);
             return View(await exercisePlanId.ToListAsync());
         }
-        
+
         // GET: ExercisePlans/Create
         public IActionResult Create()
         {
             return View();
         }
-        
+
         // POST: ExercisePlans/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -104,49 +104,52 @@ namespace Fitbod.Controllers
         public async Task<IActionResult> EntryIndex(int? id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var exerciseplan = await _context.ExercisePlan.FirstOrDefaultAsync(x => x.ExercisePlanId == id);
-
-            if (id == null || _context.ExercisePlanEntry == null)
+            var exercisePlan = await _context.ExercisePlan.FirstOrDefaultAsync(x => x.ExercisePlanId == id);
+            if (exercisePlan != null)
             {
-                return NotFound();
-            }
-            if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
-            {
-                var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exerciseplan.ExercisePlanId).ToList();
 
-                //Check if day is a number in database
-                foreach (var item in exercisePlanEntry)
+                if (id == null || _context.ExercisePlanEntry == null)
                 {
-                    if (int.TryParse(item.Day, out var dayEnum))
+                    return NotFound();
+                }
+                if (exercisePlan.FitbodUser != null && exercisePlan.FitbodUser.Id == user.Id)
+                {
+                    var exercisePlanEntry = _context.ExercisePlanEntry.Include(u => u.Exercise).Where(x => x.ExercisePlanId == exercisePlan.ExercisePlanId).ToList();
 
+                    //Check if day is a number in database
+                    foreach (var item in exercisePlanEntry)
                     {
-                        switch (dayEnum)
+                        if (int.TryParse(item.Day, out var dayEnum))
+
                         {
-                            case 0:
-                                item.Day = "Mandag";
-                                break;
-                            case 1:
-                                item.Day = "Tirsdag";
-                                break;
-                            case 2:
-                                item.Day = "Onsdag";
-                                break;
-                            case 3:
-                                item.Day = "Torsdag";
-                                break;
-                            case 4:
-                                item.Day = "Fredag";
-                                break;
-                            case 5:
-                                item.Day = "Lørdag";
-                                break;
-                            case 6:
-                                item.Day = "Søndag";
-                                break;
+                            switch (dayEnum)
+                            {
+                                case 0:
+                                    item.Day = "Mandag";
+                                    break;
+                                case 1:
+                                    item.Day = "Tirsdag";
+                                    break;
+                                case 2:
+                                    item.Day = "Onsdag";
+                                    break;
+                                case 3:
+                                    item.Day = "Torsdag";
+                                    break;
+                                case 4:
+                                    item.Day = "Fredag";
+                                    break;
+                                case 5:
+                                    item.Day = "Lørdag";
+                                    break;
+                                case 6:
+                                    item.Day = "Søndag";
+                                    break;
+                            }
                         }
                     }
+                    return View("../ExercisePlanEntries/Index", exercisePlanEntry);
                 }
-                return View("../ExercisePlanEntries/Index", exercisePlanEntry);
             }
             return NotFound();
         }
@@ -185,20 +188,24 @@ namespace Fitbod.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var exercisePlanEntry = await _context.ExercisePlanEntry.FindAsync(id);
-            var exerciseplan = await _context.ExercisePlan.FindAsync(exercisePlanEntry.ExercisePlanId);
-
-            if (id == null || _context.ExercisePlanEntry == null)
+            if (exercisePlanEntry != null)
             {
-                return NotFound();
-            }
 
-            if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
-            {
-                if (exercisePlanEntry == null)
+                var exerciseplan = await _context.ExercisePlan.FindAsync(exercisePlanEntry.ExercisePlanId);
+
+                if (id == null || _context.ExercisePlanEntry == null)
                 {
                     return NotFound();
                 }
-                return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
+
+                if (exerciseplan.FitbodUser != null && exerciseplan.FitbodUser.Id == user.Id)
+                {
+                    if (exercisePlanEntry == null)
+                    {
+                        return NotFound();
+                    }
+                    return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
+                }
             }
             return NotFound();
         }
@@ -277,7 +284,7 @@ namespace Fitbod.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         private bool ExercisePlanEntryExists(int id)
         {
             return _context.ExercisePlanEntry.Any(e => e.EntryId == id);
