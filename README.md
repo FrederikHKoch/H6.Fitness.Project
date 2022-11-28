@@ -4,7 +4,7 @@
 
 Dette er et eksempel på hvordan man får kørt programmet.
 
-### Prerequisites
+## Prerequisites
 
 Her er et eksempel på hvordan man henter de programmer der er nødvendige for at kunne lave database migreringer.
 * Visual Studio 2022
@@ -18,13 +18,13 @@ Her er et eksempel på hvordan man henter de programmer der er nødvendige for a
   dotnet ef migrations add "foo"
   dotnet ef database update
   ```
-### Installation
+## Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/FrederikHKoch/H6.Fitness.Project.git
    ```
-## Tilføj appsettings.json fil
+### Tilføj appsettings.json fil
 3. Højre klik på konsol applikationen "Fitbod"
 4. Add new -> appsettings.json
 5. Kopier nedenfor ind under.
