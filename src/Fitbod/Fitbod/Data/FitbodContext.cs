@@ -59,7 +59,7 @@ namespace Fitbod.Data
                    new Exercise() { ExerciseId = 5, Name = "Bench press", Musclegroup = "Bryst", Description = "Adddescriptionhere", Image = "benchpress.png" },
                    new Exercise() { ExerciseId = 6, Name = "Seated Cable Chest Press", Musclegroup = "Bryst", Description = "Adddescriptionhere", Image = "chest-supported-row.jpg" },
                    new Exercise() { ExerciseId = 7, Name = "Chest-supported Row", Musclegroup = "Ryg", Description = "Adddescriptionhere", Image = "benchpress.png" },
-                   new Exercise() { ExerciseId = 8, Name = "Pull-ups", Musclegroup = "Ryg", Description = "Adddescriptionhere", Image = "pullup.png" },
+                   new Exercise() { ExerciseId = 8, Name = "Pull-ups", Musclegroup = "Ryg", Description = "Adddescriptionhere", Image = "pullups.png" },
                    new Exercise() { ExerciseId = 9, Name = "Overhead press", Musclegroup = "Skulder", Description = "Adddescriptionhere", Image = "Deadlift.jpg" },
                    new Exercise() { ExerciseId = 10, Name = "Reverse grip", Musclegroup = "Triceps", Description = "Adddescriptionhere", Image = "pullups.png" },
                    new Exercise() { ExerciseId = 11, Name = "Rope Triceps Pressdown", Musclegroup = "Triceps", Description = "Adddescriptionhere", Image = "Squat.png" },
