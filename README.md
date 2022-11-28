@@ -42,4 +42,8 @@ Her er et eksempel på hvordan man henter de programmer der er nødvendige for a
        } 
      }
    ```
+## Tilføj brugere
+1. log ind på "FitbodSuperuser@hotmail.com" med password "Test123#"
+2. Opret Admin bruger (for at se alle knapper).
+3. Log ud og opret almindelig bruger ved at sige registrer.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
