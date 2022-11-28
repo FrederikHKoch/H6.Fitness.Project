@@ -25,9 +25,9 @@ Her er et eksempel på hvordan man henter de programmer der er nødvendige for a
    git clone https://github.com/FrederikHKoch/H6.Fitness.Project.git
    ```
 2. Tilføj appsettings.json fil
-   2.1 Højre klik på konsol applikationen "Fitbod"
-   2.2 Add new -> appsettings.json
-   2.3 Kopier nedenfor ind under.
+3. Højre klik på konsol applikationen "Fitbod"
+4. Add new -> appsettings.json
+5. Kopier nedenfor ind under.
    ```sh
     {
       "Logging": {
