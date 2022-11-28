@@ -119,9 +119,8 @@ namespace Fitbod.Controllers
             ViewData["DishId"] = new SelectList(_context.Dish, "DishId", "Name", WeekDay.DishId);
             return View(WeekDay);
         }        
-
-        [Authorize(Policy = "adminrights")]
         // GET: WeekDay/Delete/5
+        [Authorize(Policy = "adminrights")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.WeekDay == null)

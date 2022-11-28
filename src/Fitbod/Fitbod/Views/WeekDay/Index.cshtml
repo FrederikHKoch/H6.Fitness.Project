@@ -1,38 +1,37 @@
 @model IEnumerable<Fitbod.Models.WeekDay>
-
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Mad Plan</h1>
-
+<h1 style="text-align: center">Mad Plan</h1>
+<br/>
+<div class="header madplancustomheader">
+    <img class="madplan_img" src="img/MadplanIndex.jpg" alt="madplan" />
+</div>
+<br/>
 @{
     if (User.IsInRole("Admin"))
     {
-        <p>
+        <p style="text-align: center">
             <a asp-action="Create">Opdater madplan</a>
         </p>
-        <p>
+        <p style="text-align: center">
             <a asp-area="" asp-controller="Dish" asp-action="Index">Retter</a>
         </p>
     }
 }
-
-@foreach (var item in Model) {
-    <tr>
-        <div class="row_custom">
-            <div class="column_custom" style="background-color:white;">
-                <h2>@Html.DisplayFor(modelItem => item.Day)</h2>
-                <a href="@Html.DisplayFor(modelItem => item.Dish.Url)">@Html.DisplayFor(modelItem => item.Dish.Name)</a>
-                <br/>
-                @{
-                    if (User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.WeekDayId">Slet</a>       
-                    }
+<div class="row_custom">
+    @foreach (var item in Model) {
+        <div class="column_custom">
+            <h2 style="text-align: center; color: white">@Html.DisplayFor(modelItem => item.Day)</h2>
+            <a href="@Html.DisplayFor(modelItem => item.Dish.Url)" class="a_custom1 btn btn-primary"><p>@Html.DisplayFor(modelItem => item.Dish.Name)</p></a>
+            @* <button class="button_custom1 btn btn-primary" onclick="href=@Html.DisplayFor(modelItem => item.Dish.Url)">@Html.DisplayFor(modelItem => item.Dish.Name)</button> *@
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <br/>
+                    <div class="btn btn-danger div_custom"><a class="a_custom1" asp-action="Delete" asp-route-id="@item.WeekDayId">Slet</a></div>       
                 }
-            </div>
-            <br/>
+            }
         </div>
-    </tr>
-}
+    }
+</div>

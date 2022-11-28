@@ -153,6 +153,7 @@ namespace Fitbod.Controllers
             }
             return NotFound();
         }
+        
         // GET: ExercisePlans/EntryCreate/5
         public async Task<IActionResult> EntryCreate(int? id)
         {
@@ -167,7 +168,7 @@ namespace Fitbod.Controllers
             }
             return NotFound();
         }
-
+        
         // POST: ExercisePlans/EntryCreate
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -182,7 +183,7 @@ namespace Fitbod.Controllers
             ViewData["ExerciseId"] = new SelectList(_context.Set<Exercise>(), "ExerciseId", "Name", exercisePlanEntry.ExerciseId);
             return View(exercisePlanEntry);
         }
-
+       
         // GET: ExercisePlanEntries/Edit/5
         public async Task<IActionResult> EntryEdit(int? id)
         {
@@ -209,7 +210,7 @@ namespace Fitbod.Controllers
             }
             return NotFound();
         }
-
+        
         // POST: ExercisePlanEntries/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -242,7 +243,7 @@ namespace Fitbod.Controllers
             }
             return View("../ExercisePlanEntries/Edit", exercisePlanEntry);
         }
-
+        
         // GET: ExercisePlanEntries/Delete/5
         public async Task<IActionResult> EntryDelete(int? id)
         {
@@ -265,7 +266,7 @@ namespace Fitbod.Controllers
             }
             return NotFound();
         }
-
+        
         // POST: ExercisePlanEntries/Delete/5
         [HttpPost, ActionName("EntryDelete")]
         [ValidateAntiForgeryToken]
