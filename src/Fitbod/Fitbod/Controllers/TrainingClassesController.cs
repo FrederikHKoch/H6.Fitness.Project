@@ -164,15 +164,9 @@ namespace Fitbod.Controllers
         public async Task<IActionResult> SignupCreate(int? id)
         {
             var trainingclass = await _context.TrainingClass.FirstOrDefaultAsync(x => x.Id == id);
-            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (trainingclass != null)
             {
-                var teamsignupentry = await _context.TeamSignUp.FirstOrDefaultAsync(x => x.TrainingClassId == trainingclass.Id);
-
-                if (teamsignupentry != null)
-                {
-                    return View("../TeamSignUps/Create");
-                }
+                return View("../TeamSignUps/Create");
             }
             return NotFound();
         }
