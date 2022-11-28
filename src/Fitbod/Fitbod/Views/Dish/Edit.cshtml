@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Ændre</h1>
+<h1>Ã†ndre</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,14 +21,15 @@
                 <input asp-for="Url" class="form-control" />
                 <span asp-validation-for="Url" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-success btn-sm" />
             </div>
         </form>
     </div>
 </div>
-
+<br/>
 <div>
-    <a asp-action="Index">Tilbage til oversigt</a>
+    <a class="btn btn-primary btn-sm" asp-action="Index">Tilbage til oversigt</a>
 </div>
 

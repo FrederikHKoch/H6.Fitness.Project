@@ -31,14 +31,14 @@
             <input type="hidden" asp-for="ExercisePlanId" />
             <br/>
             <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<br/>
 <div>
-    <a asp-controller="ExercisePlans" asp-action="EntryIndex" asp-route-id="@Model?.ExercisePlanId">Tilbage til Oversigt</a>
+    <a class="btn btn-primary btn-sm" asp-controller="ExercisePlans" asp-action="EntryIndex" asp-route-id="@Model?.ExercisePlanId">Tilbage til Oversigt</a>
 </div>
 
 @section Scripts {

@@ -11,12 +11,12 @@
     if (User.IsInRole("Admin"))
     {
         <p>
-            <a asp-action="Create">Opret nyt træningshold</a>
+            <a class="btn btn-primary btn-sm" asp-action="Create">Opret nyt træningshold</a>
         </p>
     }
 }
 <div>
-    <a asp-action="SignupIndex">Se tilmeldinger</a>
+    <a class="btn btn-primary btn-sm" asp-action="SignupIndex">Se tilmeldinger</a>
 </div>
 
 <div>
@@ -78,15 +78,15 @@
                     @Html.DisplayFor(modelItem => item.Signups)
                 </td>
                 <td>
-                    <a asp-action="SignupCreate" asp-route-id="@item.Id">Tilmeld</a> |
-                    <a asp-action="SignupDelete" asp-route-id="@item.Id">Afmeld</a>
+                    <a class="btn btn-success btn-sm" asp-action="SignupCreate" asp-route-id="@item.Id">Tilmeld</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="SignupDelete" asp-route-id="@item.Id">Afmeld</a>
                 </td>
                 @{
                     if (User.IsInRole("Admin"))
                     {
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Ændre</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Slet</a>
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Ændre</a> |
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Slet</a>
                         </td>
                     }
                 }

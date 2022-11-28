@@ -40,8 +40,8 @@
                     @Html.DisplayFor(modelItem => item.Day)
                 </td>
                 <td>
-                    <a asp-controller="ExercisePlans" asp-action="EntryEdit" asp-route-id="@item.EntryId">Ændre</a> |
-                    <a asp-action="EntryDelete" asp-route-id="@item.EntryId">Fjern</a>
+                    <a class="btn btn-primary btn-sm" asp-controller="ExercisePlans" asp-action="EntryEdit" asp-route-id="@item.EntryId">Ændre</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="EntryDelete" asp-route-id="@item.EntryId">Fjern</a>
                 </td>
 
             </tr>
@@ -49,5 +49,5 @@
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Tilbage til Planoversigt</a>
+    <a class="btn btn-primary btn-sm" asp-action="Index">Tilbage til Planoversigt</a>
 </div>
